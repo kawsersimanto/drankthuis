@@ -196,14 +196,16 @@
               "name": "t:names.product_card_media",
               "settings": {
                 "image_ratio": "square",
+                "image_fit": "contain",
                 "border": "solid",
                 "border_width": 1,
-                "border_opacity": 100,
+                "border_color": "#2f2f2d",
+                "border_opacity": 10,
                 "border_radius": 14,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-start": 20,
+                "padding-block-end": 20,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
               },
               "blocks": {}
             },

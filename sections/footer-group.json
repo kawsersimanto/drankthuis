@@ -225,7 +225,7 @@
                       "name": "t:names.menu",
                       "settings": {
                         "menu": "company",
-                        "heading": "",
+                        "heading": "COMPANY",
                         "menu_spacing": 8,
                         "show_as_accordion": false,
                         "accordion_icon": "caret",
@@ -299,7 +299,7 @@
                       "name": "t:names.menu",
                       "settings": {
                         "menu": "policies",
-                        "heading": "",
+                        "heading": "POLICY",
                         "menu_spacing": 8,
                         "show_as_accordion": false,
                         "accordion_icon": "caret",
@@ -412,7 +412,7 @@
                           "type": "text",
                           "name": "t:names.heading",
                           "settings": {
-                            "text": "<h2>Nieuw binnen</h2>",
+                            "text": "<h2>CONTACT</h2>",
                             "width": "fit-content",
                             "max_width": "normal",
                             "alignment": "left",
@@ -658,6 +658,7 @@
       "block_order": [
         "group_zKUAVn"
       ],
+      "custom_css": [],
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
