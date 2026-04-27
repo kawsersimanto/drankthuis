@@ -1,5 +1,3 @@
-
-
 {% assign product = closest.product %}
 
 {% capture children %}
@@ -78,6 +76,16 @@
       "default": "portrait",
       "label": "t:settings.aspect_ratio",
       "info": "t:info.aspect_ratio_adjusted"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ]
     },
     {
       "type": "header",
