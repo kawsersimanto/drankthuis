@@ -1,4 +1,3 @@
-
 {% render 'button', link: block.settings.link %}
 
 {% schema %}
@@ -100,6 +99,94 @@
       "unit": "%",
       "default": 100,
       "visible_if": "{{ block.settings.width_mobile == \"custom\" }}"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left",
+      "label": "Padding Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right",
+      "label": "Padding Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "t:settings.font_weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semibold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        },
+        {
+          "value": "800",
+          "label": "Extra Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "text",
+      "id": "letter_spacing",
+      "label": "t:settings.letter_spacing",
+      "default": "0em"
+    },
+    {
+      "type": "text",
+      "id": "line_height",
+      "label": "t:settings.line_height",
+      "default": "1.5em"
     }
   ],
   "presets": [
