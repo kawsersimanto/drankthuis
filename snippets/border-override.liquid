@@ -2,6 +2,14 @@
   Renders border override CSS
 {%- endcomment -%}
 
---border-width: {{ settings.border_width }}px; --border-style: {{ settings.border }}; --border-color:
-rgb(var(--color-border-rgb) / {{ settings.border_opacity | divided_by: 100.0 }}); --border-radius:
-{{ settings.border_radius }}px; {% if settings.border_radius > 0 %} overflow: hidden; {% endif %}
+{% liquid
+  assign border_alpha = settings.border_opacity | divided_by: 100.0
+%}
+
+--border-width: {{ settings.border_width }}px; --border-style: {{ settings.border }};
+{% if settings.border_color and settings.border_color != blank %}
+  --border-color: {{ settings.border_color | color_modify: 'alpha', border_alpha }};
+{% else %}
+  --border-color: rgb(var(--color-border-rgb) / {{ border_alpha }});
+{% endif %}
+--border-radius: {{ settings.border_radius }}px; {% if settings.border_radius > 0 %}overflow: hidden;{% endif %}
