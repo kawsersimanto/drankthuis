@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "section": {
       "type": "section",
@@ -140,18 +141,21 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "card-gallery": {
+            "product_card_gallery_REnqJV": {
               "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
+                "image_ratio": "square",
+                "image_fit": "contain",
+                "border": "solid",
                 "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "border_color": "#2f2f2d",
+                "border_opacity": 10,
+                "border_radius": 14,
+                "padding-block-start": 20,
+                "padding-block-end": 20,
+                "padding-inline-start": 20,
+                "padding-inline-end": 20
               },
               "blocks": {}
             },
@@ -204,7 +208,7 @@
             }
           },
           "block_order": [
-            "card-gallery",
+            "product_card_gallery_REnqJV",
             "product_title_4nY4eT",
             "price_EzJzMm"
           ]
@@ -214,6 +218,8 @@
         "layout_type": "grid",
         "product_card_size": "medium",
         "mobile_product_card_size": "small",
+        "enable_infinite_scroll": true,
+        "products_per_page": 24,
         "product_grid_width": "centered",
         "full_width_on_mobile": true,
         "columns_gap_horizontal": 16,

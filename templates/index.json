@@ -49,7 +49,14 @@
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
-            "custom_width_mobile": 100
+            "custom_width_mobile": 100,
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "padding_left": 0,
+            "padding_right": 0,
+            "font_weight": "400",
+            "letter_spacing": "0em",
+            "line_height": "1.5em"
           },
           "blocks": {}
         }
@@ -220,7 +227,7 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 0,
+                "gap": 5,
                 "width": "fill",
                 "custom_width": 100,
                 "width_mobile": "fill",
@@ -366,11 +373,20 @@
                     "padding-inline-end": 0
                   },
                   "blocks": {}
+                },
+                "custom_liquid_JcVkTz": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "{% if closest.product.metafields.custom.refund_value %}\n  {% assign refund = closest.product.metafields.custom.refund_value %}\n  <p>Deposit: {{ closest.product.metafields.custom.refund_value.value | money }}\n</p>\n{% endif %}"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "product_card_group_c3aaJC",
-                "price_4TTWUK"
+                "price_4TTWUK",
+                "custom_liquid_JcVkTz"
               ]
             }
           },
@@ -382,7 +398,7 @@
       },
       "name": "Featured collection",
       "settings": {
-        "collection": "iced-tea",
+        "collection": "abdijbier-abbey-beer",
         "layout_type": "grid",
         "carousel_on_mobile": false,
         "max_products": 8,
@@ -431,11 +447,17 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
+    },
+    "theme_section_i6tU4N": {
+      "type": "theme-section",
+      "name": "Theme Section",
+      "settings": {}
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
-    "section_6YxzzR"
+    "section_6YxzzR",
+    "theme_section_i6tU4N"
   ]
 }
