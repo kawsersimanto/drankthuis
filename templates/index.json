@@ -447,17 +447,11 @@
         "padding-block-start": 0,
         "padding-block-end": 0
       }
-    },
-    "theme_section_i6tU4N": {
-      "type": "theme-section",
-      "name": "Theme Section",
-      "settings": {}
     }
   },
   "order": [
     "hero_jVaWmY",
     "product_list_fa6P9H",
-    "section_6YxzzR",
-    "theme_section_i6tU4N"
+    "section_6YxzzR"
   ]
 }
