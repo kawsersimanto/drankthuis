@@ -1,10 +1,4 @@
-{% liquid
-  assign product = closest.product
--%}
-
-{% if product.metafields.custom.refund_value %}
-  <p>Deposit: {{ product.metafields.custom.refund_value.value | money }}</p>
-{% endif %}
+{% render 'product-deposit', block: block %}
 
 {% schema %}
 {
