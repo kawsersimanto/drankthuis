@@ -1437,18 +1437,9 @@
         "type": "select",
         "id": "badge_position",
         "options": [
-          {
-            "value": "bottom-left",
-            "label": "t:options.bottom_left"
-          },
-          {
-            "value": "top-left",
-            "label": "t:options.top_left"
-          },
-          {
-            "value": "top-right",
-            "label": "t:options.top_right"
-          }
+          { "value": "bottom-left", "label": "t:options.bottom_left" },
+          { "value": "top-left", "label": "t:options.top_left" },
+          { "value": "top-right", "label": "t:options.top_right" }
         ],
         "default": "top-left",
         "label": "t:settings.badge_position"
@@ -1480,6 +1471,12 @@
         "default": "scheme-5"
       },
       {
+        "type": "color_scheme",
+        "id": "badge_new_color_scheme",
+        "label": "New Arrivals",
+        "default": "scheme-4"
+      },
+      {
         "type": "header",
         "content": "t:names.typography"
       },
@@ -1488,40 +1485,72 @@
         "id": "badge_font_family",
         "label": "t:settings.font",
         "options": [
-          {
-            "value": "body",
-            "label": "t:options.body"
-          },
-          {
-            "value": "subheading",
-            "label": "t:options.subheading"
-          },
-          {
-            "value": "heading",
-            "label": "t:options.heading"
-          },
-          {
-            "value": "accent",
-            "label": "t:options.accent"
-          }
+          { "value": "body", "label": "t:options.body" },
+          { "value": "subheading", "label": "t:options.subheading" },
+          { "value": "heading", "label": "t:options.heading" },
+          { "value": "accent", "label": "t:options.accent" }
         ],
         "default": "body"
+      },
+      {
+        "type": "select",
+        "id": "badge_font_size",
+        "label": "Font size",
+        "options": [
+          { "value": "10px", "label": "10px" },
+          { "value": "11px", "label": "11px" },
+          { "value": "12px", "label": "12px" },
+          { "value": "13px", "label": "13px" },
+          { "value": "14px", "label": "14px" },
+          { "value": "16px", "label": "16px" }
+        ],
+        "default": "12px"
+      },
+      {
+        "type": "select",
+        "id": "badge_font_weight",
+        "label": "Font weight",
+        "options": [
+          { "value": "400", "label": "Regular" },
+          { "value": "500", "label": "Medium" },
+          { "value": "600", "label": "Semi-bold" },
+          { "value": "700", "label": "Bold" }
+        ],
+        "default": "400"
       },
       {
         "type": "select",
         "id": "badge_text_transform",
         "label": "t:settings.text_case",
         "options": [
-          {
-            "value": "none",
-            "label": "t:options.default"
-          },
-          {
-            "value": "uppercase",
-            "label": "t:options.uppercase"
-          }
+          { "value": "none", "label": "t:options.default" },
+          { "value": "uppercase", "label": "t:options.uppercase" }
         ],
         "default": "none"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_vertical",
+        "min": 2,
+        "max": 20,
+        "step": 1,
+        "unit": "px",
+        "label": "Vertical padding",
+        "default": 4
+      },
+      {
+        "type": "range",
+        "id": "badge_padding_horizontal",
+        "min": 4,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "label": "Horizontal padding",
+        "default": 10
       }
     ]
   },

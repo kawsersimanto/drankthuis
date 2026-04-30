@@ -2,28 +2,50 @@
 
 {% capture children %}
   {% unless product == blank %}
+
+    {% comment %} Calculate savings for the Save badge {% endcomment %}
+    {% assign savings = product.compare_at_price | minus: product.price %}
+
+    {% comment %} Calculate days since published for the New badge {% endcomment %}
+    {% assign now_seconds = 'now' | date: '%s' | plus: 0 %}
+    {% assign published_seconds = product.published_at | date: '%s' | plus: 0 %}
+    {% assign seconds_since = now_seconds | minus: published_seconds %}
+    {% assign days_since = seconds_since | divided_by: 86400 %}
+    {% assign is_new = false %}
+    {% if days_since <= 20 %}{% assign is_new = true %}{% endif %}
+
     <div
       class="product-badges product-badges--{{ settings.badge_position }}"
       style="
         --badge-border-radius: {{ settings.badge_corner_radius }}px;
-        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family); --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight); --badge-text-transform: {{ settings.badge_text_transform }};
+        --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
+        --badge-font-weight-custom: {{ settings.badge_font_weight }};
+        --badge-font-weight: var(--font-{{ settings.badge_font_family }}--weight);
+        --badge-text-transform: {{ settings.badge_text_transform }};
+        --badge-font-size: {{ settings.badge_font_size }};
+        --badge-padding: {{ settings.badge_padding_vertical }}px {{ settings.badge_padding_horizontal }}px;
       "
     >
-      {%- if product.available == false or product.compare_at_price > product.price -%}
-        <div
-          class="
-            product-badges__badge product-badges__badge--rectangle
-            {% if product.available == false %} color-{{ settings.badge_sold_out_color_scheme }}{% elsif product.compare_at_price > product.price %} color-{{ settings.badge_sale_color_scheme }}{% endif %}
-          "
-        >
-          {%- if product.available == false -%}
-            {{ 'content.product_badge_sold_out' | t }}
-          {%- elsif product.compare_at_price > product.price -%}
-            {{ 'content.product_badge_sale' | t }}
-          {%- endif -%}
+      {% comment %} Sold out badge — highest priority {% endcomment %}
+      {%- if product.available == false -%}
+        <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
+          {{ 'content.product_badge_sold_out' | t }}
+        </div>
+
+      {% comment %} Sale badge + Save amount {% endcomment %}
+      {%- elsif product.compare_at_price > product.price -%}
+        <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
+          Save {{ savings | money }}
+        </div>
+
+      {% comment %} New badge — only shown if not on sale {% endcomment %}
+      {%- elsif is_new -%}
+        <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_new_color_scheme | default: settings.badge_sale_color_scheme }}">
+          New
         </div>
       {%- endif -%}
     </div>
+
     {%  if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add', product: product, section_id: section.id %}
     {% endif %}

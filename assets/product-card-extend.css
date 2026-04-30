@@ -6,3 +6,13 @@
   border-radius: 8px;
   border: 1px solid #d4d4d4;
 }
+
+.product-badges--top-right {
+  top: 8px !important;
+  right: 8px !important;
+}
+
+.product-badges--top-left {
+  top: 8px !important;
+  left: 8px !important;
+}
