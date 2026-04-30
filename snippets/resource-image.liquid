@@ -110,17 +110,22 @@
   assign content_index = block_parts.last | default: 0
   assign variant = content_index | modulo: placeholder_variants | plus: 1
   assign placeholder_name = placeholder_prefix | append: variant
+
+  # Object fit with fallback
+  assign object_fit = block_settings.object_fit | default: 'cover'
 %}
 
-{% comment %} Apply aspect ratio to parent component {% endcomment %}
+{% comment %} Apply aspect ratio and object-fit to parent component {% endcomment %}
 {% style %}
   {% if content_type == 'articles' %}
     .featured-blog-posts-card[data-block-id="{{ parent_block_id }}"] {
       --ratio: {{ ratio }};
+      --object-fit: {{ object_fit }};
     }
   {% elsif content_type == 'collections' %}
     .collection-card[data-block-id="{{ parent_block_id }}"] {
       --ratio: {{ ratio }};
+      --object-fit: {{ object_fit }};
     }
   {% endif %}
 {% endstyle %}
@@ -199,7 +204,7 @@
   }
 
   .resource-image__image {
-    object-fit: cover;
+    object-fit: var(--object-fit, cover);
     aspect-ratio: var(--ratio);
     width: 100%;
     height: 100%;

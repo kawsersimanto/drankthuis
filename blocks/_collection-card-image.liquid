@@ -1,5 +1,3 @@
-
-
 {%- doc -%}
   Display an image of a collection inside a collection card.
   Intended for collection-card.liquid block.
@@ -53,6 +51,17 @@
         }
       ],
       "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "object_fit",
+      "label": "Object Fit",
+      "options": [
+        { "value": "cover", "label": "t:options.cover" },
+        { "value": "contain", "label": "t:options.contain" },
+        { "value": "fill", "label": "t:options.fill" }
+      ],
+      "default": "cover"
     },
     {
       "type": "checkbox",
