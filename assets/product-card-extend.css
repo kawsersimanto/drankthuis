@@ -1,4 +1,5 @@
 .quick-add__button.add-to-cart-button {
+  --quick-add-mobile-display: block;
   bottom: 8px;
   right: 8px;
   opacity: 1;
