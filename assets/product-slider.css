@@ -1,0 +1,11 @@
+.swiper-button-disabled {
+  opacity: 0.3;
+}
+
+[data-product-scrollbar] {
+  --swiper-scrollbar-bg-color: #2edae623;
+}
+
+[data-product-scrollbar] .swiper-scrollbar-drag {
+  --swiper-scrollbar-drag-bg-color: #2ed9e6;
+}
