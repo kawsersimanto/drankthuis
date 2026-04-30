@@ -21,6 +21,9 @@
         font-family: {{ block.settings.font }};
         font-size: {{ block.settings.font_size }};
         color: {{ block.settings.color }};
+        {% if block.settings.line_height != blank %}
+          line-height: {{ block.settings.line_height }};
+        {% endif %}
       {% endif %}
     "
     {{ block.shopify_attributes }}
@@ -237,24 +240,11 @@
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {
-      "type": "select",
+      "type": "text",
       "id": "line_height",
       "label": "t:settings.line_height",
-      "options": [
-        {
-          "value": "tight",
-          "label": "t:options.tight"
-        },
-        {
-          "value": "normal",
-          "label": "t:options.normal"
-        },
-        {
-          "value": "loose",
-          "label": "t:options.loose"
-        }
-      ],
-      "default": "normal",
+      "placeholder": "e.g. 1.5, 24px, 1.8em",
+      "default": "1em",
       "visible_if": "{{ block.settings.type_preset == 'custom' }}"
     },
     {

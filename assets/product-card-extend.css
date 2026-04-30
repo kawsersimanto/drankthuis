@@ -1,0 +1,7 @@
+.quick-add__button.add-to-cart-button {
+  bottom: 8px;
+  right: 8px;
+  opacity: 1;
+  border-radius: 8px;
+  border: 1px solid #d4d4d4;
+}
