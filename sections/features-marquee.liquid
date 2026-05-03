@@ -7,64 +7,59 @@
 {% assign img_w = section.settings.image_size | remove: 'px' %}
 {% assign img_h = section.settings.image_height | remove: 'px' %}
 
-<div class="section section--page-width tw:md:py-0 tw:py-6">
-  <div class="tw:flex tw:md:flex-row tw:flex-col tw:items-center tw:md:gap-8 tw:gap-6">
-    {% if section.settings.feature_title != blank %}
-      <p class="tw:font-semibold tw:shrink-0 tw:uppercase tw:text-lg">{{ section.settings.feature_title }}</p>
-    {% endif %}
-    <marquee-component
-      class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
-      data-speed-factor="25"
-      style="
-        {%- render 'spacing-style', settings: section.settings %};
-        {%- render 'gap-style', value: section.settings.gap_between_elements, name: 'marquee-gap' %}
-        --marquee-direction: {{ section.settings.movement_direction }};
-        --padding-block-start: {{ section.settings["padding-block-start"] }}px;
-        --padding-block-end: {{ section.settings["padding-block-end"] }}px;
-        --mobile-padding-block-start: {{ section.settings["mobile-padding-block-start"] }}px;
-        --mobile-padding-block-end: {{ section.settings["mobile-padding-block-end"] }}px;
-        --desktop-gap: {{ section.settings.gap_between_elements }}px;
-        --desktop-inner-gap: {{ section.settings.item_inner_gap }}px;
-        --desktop-image-w: {{ section.settings.image_size }};
-        --desktop-image-h: {{ section.settings.image_height }};
-        --mobile-gap: {{ section.settings.mobile_gap_between_elements }}px;
-        --mobile-inner-gap: {{ section.settings.mobile_item_inner_gap }}px;
-        --mobile-image-w: {{ section.settings.mobile_image_size }};
-        --mobile-image-h: {{ section.settings.mobile_image_height }};
-        --image-fit: {{ section.settings.image_object_fit }};
-      "
-      data-movement-direction="{{ section.settings.movement_direction }}"
-    >
-      <div class="marquee__wrapper" ref="wrapper">
-        <div class="marquee__content" ref="content">
-          {% for block in section.blocks %}
-            <div class="marquee__repeated-items" ref="marqueeItems[]" {{ block.shopify_attributes }}>
-              <div class="marquee__item-inner">
-                {% if block.settings.image %}
-                  <img
-                    src="{{ block.settings.image | image_url }}"
-                    alt="{{ block.settings.image.alt }}"
-                    width="{{ img_w }}"
-                    height="{{ img_h }}"
-                    class="marquee__item-image tw:shrink-0"
-                  >
-                {% else %}
-                  <img
-                    src="{{ 'feature.svg' | asset_url }}"
-                    alt=""
-                    width="{{ img_w }}"
-                    height="{{ img_h }}"
-                    class="marquee__item-image tw:shrink-0"
-                  >
-                {% endif %}
-                <div class="marquee__item-text">{{ block.settings.text }}</div>
-              </div>
+<div class="tw:md:py-0 tw:py-6 tw:px-4">
+  <marquee-component
+    class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+    data-speed-factor="25"
+    style="
+      {%- render 'spacing-style', settings: section.settings %};
+      {%- render 'gap-style', value: section.settings.gap_between_elements, name: 'marquee-gap' %}
+      --marquee-direction: {{ section.settings.movement_direction }};
+      --padding-block-start: {{ section.settings["padding-block-start"] }}px;
+      --padding-block-end: {{ section.settings["padding-block-end"] }}px;
+      --mobile-padding-block-start: {{ section.settings["mobile-padding-block-start"] }}px;
+      --mobile-padding-block-end: {{ section.settings["mobile-padding-block-end"] }}px;
+      --desktop-gap: {{ section.settings.gap_between_elements }}px;
+      --desktop-inner-gap: {{ section.settings.item_inner_gap }}px;
+      --desktop-image-w: {{ section.settings.image_size }};
+      --desktop-image-h: {{ section.settings.image_height }};
+      --mobile-gap: {{ section.settings.mobile_gap_between_elements }}px;
+      --mobile-inner-gap: {{ section.settings.mobile_item_inner_gap }}px;
+      --mobile-image-w: {{ section.settings.mobile_image_size }};
+      --mobile-image-h: {{ section.settings.mobile_image_height }};
+      --image-fit: {{ section.settings.image_object_fit }};
+    "
+    data-movement-direction="{{ section.settings.movement_direction }}"
+  >
+    <div class="marquee__wrapper" ref="wrapper">
+      <div class="marquee__content" ref="content">
+        {% for block in section.blocks %}
+          <div class="marquee__repeated-items" ref="marqueeItems[]" {{ block.shopify_attributes }}>
+            <div class="marquee__item-inner">
+              {% if block.settings.image %}
+                <img
+                  src="{{ block.settings.image | image_url }}"
+                  alt="{{ block.settings.image.alt }}"
+                  width="{{ img_w }}"
+                  height="{{ img_h }}"
+                  class="marquee__item-image tw:shrink-0"
+                >
+              {% else %}
+                <img
+                  src="{{ 'feature.svg' | asset_url }}"
+                  alt=""
+                  width="{{ img_w }}"
+                  height="{{ img_h }}"
+                  class="marquee__item-image tw:shrink-0"
+                >
+              {% endif %}
+              <div class="marquee__item-text">{{ block.settings.text }}</div>
             </div>
-          {% endfor %}
-        </div>
+          </div>
+        {% endfor %}
       </div>
-    </marquee-component>
-  </div>
+    </div>
+  </marquee-component>
 </div>
 
 {% stylesheet %}

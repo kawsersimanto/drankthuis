@@ -54,4 +54,6 @@ class ProductSlider extends HTMLElement {
   }
 }
 
-customElements.define("product-slider", ProductSlider);
+if (!customElements.get("product-slider")) {
+  customElements.define("product-slider", ProductSlider);
+}
