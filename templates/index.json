@@ -97,6 +97,40 @@
         "padding-block-end": 72
       }
     },
+    "features_marquee_fhWCcq": {
+      "type": "features-marquee",
+      "blocks": {
+        "item_WiidDw": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Ellipse_1974.svg",
+            "text": "<p>Limited-time FREE DELIVERY on all orders!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_WiidDw"
+      ],
+      "name": "Features Marquee",
+      "settings": {
+        "feature_title": "",
+        "movement_direction": "normal",
+        "color_scheme": "scheme-e51fd7fe-c1d2-4752-be64-4fa7632b38d9",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "mobile-padding-block-start": 16,
+        "mobile-padding-block-end": 16,
+        "gap_between_elements": 24,
+        "item_inner_gap": 8,
+        "mobile_gap_between_elements": 16,
+        "mobile_item_inner_gap": 8,
+        "image_size": "5px",
+        "image_height": "5px",
+        "mobile_image_size": "5px",
+        "mobile_image_height": "5px",
+        "image_object_fit": "contain"
+      }
+    },
     "product_slider_jkctPJ": {
       "type": "product-slider",
       "blocks": {
@@ -1416,6 +1450,7 @@
   },
   "order": [
     "hero_jVaWmY",
+    "features_marquee_fhWCcq",
     "product_slider_jkctPJ",
     "collection_list_6qF6f7",
     "product_slider_WfpnxJ",
