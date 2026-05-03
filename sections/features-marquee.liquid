@@ -1,0 +1,360 @@
+<script
+  src="{{ 'marquee.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+{% assign img_w = section.settings.image_size | remove: 'px' %}
+{% assign img_h = section.settings.image_height | remove: 'px' %}
+
+<div class="section section--page-width tw:md:py-0 tw:py-6">
+  <div class="tw:flex tw:md:flex-row tw:flex-col tw:items-center tw:md:gap-8 tw:gap-6">
+    {% if section.settings.feature_title != blank %}
+      <p class="tw:font-semibold tw:shrink-0 tw:uppercase tw:text-lg">{{ section.settings.feature_title }}</p>
+    {% endif %}
+    <marquee-component
+      class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+      data-speed-factor="25"
+      style="
+        {%- render 'spacing-style', settings: section.settings %};
+        {%- render 'gap-style', value: section.settings.gap_between_elements, name: 'marquee-gap' %}
+        --marquee-direction: {{ section.settings.movement_direction }};
+        --padding-block-start: {{ section.settings["padding-block-start"] }}px;
+        --padding-block-end: {{ section.settings["padding-block-end"] }}px;
+        --mobile-padding-block-start: {{ section.settings["mobile-padding-block-start"] }}px;
+        --mobile-padding-block-end: {{ section.settings["mobile-padding-block-end"] }}px;
+        --desktop-gap: {{ section.settings.gap_between_elements }}px;
+        --desktop-inner-gap: {{ section.settings.item_inner_gap }}px;
+        --desktop-image-w: {{ section.settings.image_size }};
+        --desktop-image-h: {{ section.settings.image_height }};
+        --mobile-gap: {{ section.settings.mobile_gap_between_elements }}px;
+        --mobile-inner-gap: {{ section.settings.mobile_item_inner_gap }}px;
+        --mobile-image-w: {{ section.settings.mobile_image_size }};
+        --mobile-image-h: {{ section.settings.mobile_image_height }};
+        --image-fit: {{ section.settings.image_object_fit }};
+      "
+      data-movement-direction="{{ section.settings.movement_direction }}"
+    >
+      <div class="marquee__wrapper" ref="wrapper">
+        <div class="marquee__content" ref="content">
+          {% for block in section.blocks %}
+            <div class="marquee__repeated-items" ref="marqueeItems[]" {{ block.shopify_attributes }}>
+              <div class="marquee__item-inner">
+                {% if block.settings.image %}
+                  <img
+                    src="{{ block.settings.image | image_url }}"
+                    alt="{{ block.settings.image.alt }}"
+                    width="{{ img_w }}"
+                    height="{{ img_h }}"
+                    class="marquee__item-image tw:shrink-0"
+                  >
+                {% else %}
+                  <img
+                    src="{{ 'feature.svg' | asset_url }}"
+                    alt=""
+                    width="{{ img_w }}"
+                    height="{{ img_h }}"
+                    class="marquee__item-image tw:shrink-0"
+                  >
+                {% endif %}
+                <div class="marquee__item-text">{{ block.settings.text }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </marquee-component>
+  </div>
+</div>
+
+{% stylesheet %}
+  /* ── Active tokens: desktop defaults, overridden at mobile breakpoint ── */
+  marquee-component {
+    --gap: var(--desktop-gap);
+    --inner-gap: var(--desktop-inner-gap);
+    --image-w: var(--desktop-image-w);
+    --image-h: var(--desktop-image-h);
+    display: block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  @media (max-width: 767px) {
+    marquee-component {
+      --gap: var(--mobile-gap);
+      --inner-gap: var(--mobile-inner-gap);
+      --image-w: var(--mobile-image-w);
+      --image-h: var(--mobile-image-h);
+      padding-block-start: var(--mobile-padding-block-start) !important;
+      padding-block-end: var(--mobile-padding-block-end) !important;
+    }
+  }
+
+  @media (min-width: 768px) {
+    marquee-component {
+      padding-block-start: var(--padding-block-start) !important;
+      padding-block-end: var(--padding-block-end) !important;
+    }
+  }
+
+  /* ── Layout ── */
+  .marquee__wrapper {
+    display: flex;
+    gap: var(--gap);
+    width: fit-content;
+    white-space: nowrap;
+  }
+
+  .marquee__content {
+    min-width: max-content;
+    display: flex;
+    gap: var(--gap);
+  }
+
+  .marquee__repeated-items {
+    min-width: max-content;
+    display: flex;
+    gap: var(--gap);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .marquee__repeated-items > * {
+    align-content: center;
+  }
+
+  .marquee__item-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--inner-gap);
+  }
+
+  /* ── Elements ── */
+  .marquee__item-image {
+    width: var(--image-w);
+    height: var(--image-h);
+    object-fit: var(--image-fit);
+    flex-shrink: 0;
+  }
+
+  .marquee__item-text > p {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .marquee__content :is(p, h1, h2, h3, h4, h5, h6) {
+    white-space: nowrap;
+  }
+
+  .marquee__content .marquee__repeated-items * {
+    max-width: none;
+  }
+
+  /* ── Animation ── */
+  @media (prefers-reduced-motion: no-preference) {
+    marquee-component:not([data-disabled]) .marquee__wrapper {
+      animation: marquee-motion var(--marquee-speed) linear infinite var(--marquee-direction);
+    }
+  }
+
+  @keyframes marquee-motion {
+    to {
+      transform: translate3d(calc(-50% - (var(--gap) / 2)), 0, 0);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Features Marquee",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "feature_title",
+      "label": "Section Title",
+      "placeholder": "Why Choose us?"
+    },
+    {
+      "type": "select",
+      "id": "movement_direction",
+      "label": "t:settings.motion_direction",
+      "options": [
+        { "value": "reverse", "label": "t:options.forward" },
+        { "value": "normal", "label": "t:options.reverse" }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile padding"
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-start",
+      "label": "Mobile top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile-padding-block-end",
+      "label": "Mobile bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Gap settings"
+    },
+    {
+      "type": "range",
+      "id": "gap_between_elements",
+      "label": "Gap between items",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "item_inner_gap",
+      "label": "Gap between image and text",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "mobile_gap_between_elements",
+      "label": "Mobile gap between items",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "mobile_item_inner_gap",
+      "label": "Mobile gap between image and text",
+      "min": 0,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Image settings"
+    },
+    {
+      "type": "text",
+      "id": "image_size",
+      "label": "Image width",
+      "default": "32px"
+    },
+    {
+      "type": "text",
+      "id": "image_height",
+      "label": "Image height",
+      "default": "32px"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_size",
+      "label": "Mobile image width",
+      "default": "24px"
+    },
+    {
+      "type": "text",
+      "id": "mobile_image_height",
+      "label": "Mobile image height",
+      "default": "24px"
+    },
+    {
+      "type": "select",
+      "id": "image_object_fit",
+      "label": "Image object fit",
+      "options": [
+        { "value": "contain", "label": "Contain" },
+        { "value": "cover", "label": "Cover" },
+        { "value": "fill", "label": "Fill" },
+        { "value": "none", "label": "None" },
+        { "value": "scale-down", "label": "Scale Down" }
+      ],
+      "default": "contain"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Marquee Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Feature</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Features Marquee",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}
