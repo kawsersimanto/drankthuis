@@ -268,7 +268,9 @@
 
                   <div class="cart-items__unit-price-wrapper">
                     <div>{{ item.properties.unit }}</div>
-                    <div>Refundable Deposit: {{ item.properties.refund_rule }}</div>
+                    <p class="tw:font-semibold cart-refundable-deposit">
+                      Refundable Deposit: {{ item.properties.refund_rule }}
+                    </p>
                   </div>
                 </td>
                 <td
@@ -530,6 +532,7 @@
     text-transform: var(--product-title-case);
     display: block;
     margin-block-start: calc((var(--font-size--md) - 1lh) / 2);
+    font-weight: 600;
   }
 
   .cart-items__variants {
@@ -904,5 +907,11 @@
       filter: none;
       opacity: 1;
     }
+  }
+
+  .cart-refundable-deposit {
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    color: #2f2f2d82;
   }
 {% endstylesheet %}
