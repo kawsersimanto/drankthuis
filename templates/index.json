@@ -115,6 +115,7 @@
       "settings": {
         "feature_title": "",
         "movement_direction": "normal",
+        "speed_factor": 25,
         "color_scheme": "scheme-e51fd7fe-c1d2-4752-be64-4fa7632b38d9",
         "padding-block-start": 24,
         "padding-block-end": 24,
@@ -1447,6 +1448,73 @@
         "space_between_desktop": 24
       }
     },
+    "features_marquee_Ez6afk": {
+      "type": "features-marquee",
+      "blocks": {
+        "item_AdKTw7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_3.png",
+            "text": ""
+          }
+        },
+        "item_76nwRd": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_4.png",
+            "text": ""
+          }
+        },
+        "item_hiqBdc": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_5.png",
+            "text": ""
+          }
+        },
+        "item_ikCp9m": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_6.png",
+            "text": ""
+          }
+        },
+        "item_aKJXjn": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Mask_group_7.png",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_AdKTw7",
+        "item_76nwRd",
+        "item_hiqBdc",
+        "item_ikCp9m",
+        "item_aKJXjn"
+      ],
+      "name": "Features Marquee",
+      "settings": {
+        "feature_title": "",
+        "movement_direction": "normal",
+        "speed_factor": 100,
+        "color_scheme": "",
+        "padding-block-start": 24,
+        "padding-block-end": 24,
+        "mobile-padding-block-start": 16,
+        "mobile-padding-block-end": 16,
+        "gap_between_elements": 65,
+        "item_inner_gap": 8,
+        "mobile_gap_between_elements": 16,
+        "mobile_item_inner_gap": 8,
+        "image_size": "100%",
+        "image_height": "50px",
+        "mobile_image_size": "24px",
+        "mobile_image_height": "24px",
+        "image_object_fit": "contain"
+      }
+    },
     "section_wExcdd": {
       "type": "section",
       "blocks": {
@@ -1745,6 +1813,7 @@
     "product_slider_WfpnxJ",
     "section_YjAmrx",
     "product_slider_LngbwK",
+    "features_marquee_Ez6afk",
     "section_wExcdd"
   ]
 }
