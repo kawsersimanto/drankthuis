@@ -269,7 +269,7 @@
                   <div class="cart-items__unit-price-wrapper">
                     <div>{{ item.properties.unit }}</div>
                     <p class="tw:font-semibold cart-refundable-deposit">
-                      Refundable Deposit: {{ item.properties.refund_rule }}
+                      Refundable Deposit: {{ item.properties.refund_rule | money }}
                     </p>
                   </div>
                 </td>
