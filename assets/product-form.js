@@ -445,7 +445,6 @@ class ProductFormComponent extends Component {
     });
 
     const fetchCfg = fetchConfig("javascript", { body: formData });
-    console.log(fetchCfg);
 
     fetch(Theme.routes.cart_add_url, {
       ...fetchCfg,
@@ -456,7 +455,6 @@ class ProductFormComponent extends Component {
     })
       .then((response) => response.json())
       .then(async (response) => {
-        console.log("Cart add response:", response);
         if (response.status) {
           this.dispatchEvent(
             new CartErrorEvent(
