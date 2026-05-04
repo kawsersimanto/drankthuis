@@ -66,6 +66,9 @@
     "auto_open_cart_drawer": true,
     "show_cart_note": false,
     "show_add_discount_code": true,
+    "cart_thumbnail_border": "solid",
+    "cart_thumbnail_border_opacity": 5,
+    "cart_thumbnail_border_radius": 8,
     "drawer_drop_shadow": true,
     "icon_stroke": "default",
     "input_border_width": 1,
@@ -116,7 +119,7 @@
           "secondary_button_hover_border": "#333333",
           "input_background": "#ffffffc7",
           "input_text_color": "#333333",
-          "input_border_color": "#dfdfdf",
+          "input_border_color": "#dddddd",
           "input_hover_background": "#00000003",
           "variant_background_color": "#ffffff",
           "variant_text_color": "#000000",
@@ -446,7 +449,7 @@
       },
       "scheme-4138c8ac-2d94-420e-8f07-4b4f17e31572": {
         "settings": {
-          "background": "#2ed9e658",
+          "background": "#2ed9e659",
           "foreground_heading": "#171717",
           "foreground": "#171717",
           "primary": "#000000cf",
