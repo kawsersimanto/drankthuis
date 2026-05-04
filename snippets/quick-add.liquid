@@ -66,6 +66,12 @@
       >
       <input
         type="hidden"
+        name="properties[unit]"
+        ref="unit"
+        value="{{ product.metafields.custom.unit }}"
+      >
+      <input
+        type="hidden"
         name="quantity"
         value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
       >
