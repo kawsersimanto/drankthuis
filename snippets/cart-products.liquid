@@ -292,6 +292,9 @@
                         {% endif %}
                       {% endif %}
                     </div>
+                    <div>
+                      {{ item.metafields.custom.refund_value }}
+                    </div>
                   </div>
                 </td>
                 <td
@@ -559,7 +562,6 @@
     display: block;
   }
 
-
   .cart-items__variant {
     display: inline;
   }
@@ -622,7 +624,6 @@
     font-size: var(--font-size--sm);
     line-height: var(--line-height);
   }
-
 
   .cart-items__price-unit {
     font-size: var(--font-size--xs);

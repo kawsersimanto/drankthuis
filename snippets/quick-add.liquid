@@ -60,6 +60,12 @@
       >
       <input
         type="hidden"
+        name="properties[refund_rule]"
+        ref="refundRule"
+        value="{{ product.metafields.custom.refund_value.value | money }}"
+      >
+      <input
+        type="hidden"
         name="quantity"
         value="{% if variant.quantity_rule.min %}{{ variant.quantity_rule.min }}{% else %}1{% endif %}"
       >
