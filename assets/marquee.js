@@ -109,11 +109,10 @@ class MarqueeComponent extends Component {
   }
 
   async #queryNumberOfCopies() {
-    const { marqueeItems } = this.refs;
+    const { marqueeItems, content } = this.refs;
 
     return new Promise((resolve) => {
       if (!marqueeItems[0]) {
-        // Wrapping the resolve in a setTimeout here and below splits each marquee reflow into a separate task.
         return setTimeout(
           () => resolve({ numberOfCopies: 1, isHorizontalResize: true }),
           0,
@@ -127,7 +126,8 @@ class MarqueeComponent extends Component {
           intersectionObserver.disconnect();
 
           const { width: marqueeWidth } = firstEntry.rootBounds ?? { width: 0 };
-          const { width: marqueeItemsWidth } = firstEntry.boundingClientRect;
+          // ✅ Measure the entire content block, not just one item
+          const contentWidth = content.scrollWidth;
 
           const isHorizontalResize = this.#marqueeWidth !== marqueeWidth;
           this.#marqueeWidth = marqueeWidth;
@@ -135,15 +135,17 @@ class MarqueeComponent extends Component {
           setTimeout(() => {
             resolve({
               numberOfCopies:
-                marqueeItemsWidth === 0
+                contentWidth === 0
                   ? 1
-                  : Math.ceil(marqueeWidth / marqueeItemsWidth),
+                  : Math.ceil(marqueeWidth / contentWidth) + 1, // +1 ensures full coverage
               isHorizontalResize,
             });
           }, 0);
         },
         { root: this },
       );
+      // ✅ Still observe marqueeItems[0] just to trigger the IntersectionObserver,
+      // but use content.scrollWidth for the actual calculation
       intersectionObserver.observe(marqueeItems[0]);
     });
   }
@@ -160,10 +162,10 @@ class MarqueeComponent extends Component {
 
   #handleResize = debounce(async () => {
     const { marqueeItems } = this.refs;
-    const { newNumberOfCopies, isHorizontalResize } =
+    // ✅ was wrongly named newNumberOfCopies — fix the destructure
+    const { numberOfCopies: newNumberOfCopies, isHorizontalResize } =
       await this.#queryNumberOfCopies();
 
-    // opt out of marquee manipulation on vertical resizes
     if (!isHorizontalResize) return;
 
     const currentNumberOfCopies = marqueeItems.length;
@@ -193,14 +195,22 @@ class MarqueeComponent extends Component {
   #duplicateContent() {
     this.clonedContent?.remove();
 
-    const clone = /** @type {HTMLElement} */ (
-      this.refs.content.cloneNode(true)
-    );
-
+    const clone = this.refs.content.cloneNode(true);
     clone.setAttribute("aria-hidden", "true");
     clone.removeAttribute("ref");
 
     this.refs.wrapper.appendChild(clone);
+
+    // ✅ Set exact pixel distance to scroll = one content block + one gap
+    const contentWidth = this.refs.content.scrollWidth;
+    this.style.setProperty(
+      "--marquee-scroll-distance",
+      `${contentWidth + this.#getGap()}px`,
+    );
+  }
+
+  #getGap() {
+    return parseFloat(getComputedStyle(this).getPropertyValue("--gap")) || 0;
   }
 
   /**

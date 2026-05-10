@@ -54,7 +54,11 @@
             {% else %}
               {% for i in (1..5) %}
                 <div class="swiper-slide">
-                  {% content_for 'block', type: '_product-card', id: 'static-product-card', closest.product: null %}
+                  {% content_for 'block',
+                    type: '_product-card',
+                    id: 'static-product-placeholder-card',
+                    closest.product: null
+                  %}
                 </div>
               {% endfor %}
             {% endif %}

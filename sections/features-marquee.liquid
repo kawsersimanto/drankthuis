@@ -7,9 +7,9 @@
 {% assign img_w = section.settings.image_size | remove: 'px' %}
 {% assign img_h = section.settings.image_height | remove: 'px' %}
 
-<div class="section section--page-width tw:md:py-0 tw:py-6 tw:px-4">
+<div class="{% if section.settings.section_width == 'page' %} section section--page-width{% endif %}">
   <marquee-component
-    class="section spacing-style gap-style color-{{ section.settings.color_scheme }}"
+    class="spacing-style gap-style color-{{ section.settings.color_scheme }}"
     data-speed-factor="{{ section.settings.speed_factor }}"
     style="
       {%- render 'spacing-style', settings: section.settings %};
@@ -96,8 +96,9 @@
   .marquee__wrapper {
     display: flex;
     gap: var(--gap);
-    width: fit-content;
+    /* width: fit-content; */
     white-space: nowrap;
+    justify-content: flex-start;
   }
 
   .marquee__content {
@@ -157,7 +158,7 @@
 
   @keyframes marquee-motion {
     to {
-      transform: translate3d(calc(-50% - (var(--gap) / 2)), 0, 0);
+      transform: translate3d(calc(-1 * var(--marquee-scroll-distance)), 0, 0);
     }
   }
 {% endstylesheet %}
@@ -185,6 +186,16 @@
         { "value": "normal", "label": "t:options.reverse" }
       ],
       "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "Width",
+      "options": [
+        { "value": "full", "label": "Full" },
+        { "value": "page", "label": "Page" }
+      ],
+      "default": "full"
     },
     {
       "type": "range",
