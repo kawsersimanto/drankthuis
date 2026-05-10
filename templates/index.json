@@ -351,6 +351,24 @@
             "product_card_group_8pWHwT",
             "price_agMiJq"
           ]
+        },
+        "static-product-placeholder-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 16,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "name": "Product Slider",
@@ -698,6 +716,24 @@
             "product_card_group_ckdY3H",
             "price_faj9tR"
           ]
+        },
+        "static-product-placeholder-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 16,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "name": "Product Slider",
@@ -937,6 +973,24 @@
             "product_card_group_Ra9bPN",
             "price_nTjAfY"
           ]
+        },
+        "static-product-placeholder-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 16,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "name": "Product Slider",
@@ -1630,36 +1684,22 @@
                     "text_6qMzw9"
                   ]
                 },
-                "email_signup_wraD3R": {
-                  "type": "email-signup",
-                  "name": "t:names.email_signup",
+                "newsletter_form_hwfEnm": {
+                  "type": "newsletter-form",
+                  "name": "Newsletter Form",
                   "settings": {
-                    "width": "fill",
-                    "custom_width": 100,
-                    "inherit_color_scheme": true,
-                    "color_scheme": "",
-                    "heading": "",
-                    "heading_preset": "h3",
-                    "border_style": "all",
-                    "border_width": 1,
-                    "border_radius": 100,
-                    "input_type_preset": "paragraph",
-                    "style_class": "button",
-                    "display_type": "text",
-                    "label": "Aanmelden",
-                    "integrated_button": false,
-                    "button_type_preset": "paragraph",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "heading": "Subscribe to our newsletter",
+                    "description": "Get the latest updates and offers.",
+                    "placeholder": "Enter your email",
+                    "button_label": "Subscribe",
+                    "success_message": "Thanks for subscribing!"
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
                 "group_3VVWKX",
-                "email_signup_wraD3R"
+                "newsletter_form_hwfEnm"
               ]
             },
             "group_CUgkyY": {
