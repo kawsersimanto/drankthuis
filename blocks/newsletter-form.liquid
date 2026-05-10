@@ -1,0 +1,110 @@
+{% doc %}
+  A newsletter signup block that captures customer emails via Shopify's contact form.
+{% enddoc %}
+
+<div class="newsletter-form-block tw:flex tw:flex-col tw:gap-4">
+  {% if block.settings.heading != blank %}
+    <div class="tw:text-2xl tw:font-semibold">{{ block.settings.heading }}</div>
+  {% endif %}
+
+  {% if block.settings.description != blank %}
+    <div class="tw:text-base">{{ block.settings.description }}</div>
+  {% endif %}
+
+  {% form 'customer', id: 'newsletter-form' %}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+
+    <div class="tw:flex tw:flex-col tw:gap-3">
+      <div class="tw:flex tw:flex-col tw:sm:flex-row tw:gap-3">
+        <input
+          type="text"
+          name="contact[first_name]"
+          id="newsletter-first-name"
+          placeholder="{{ block.settings.first_name_placeholder | default: 'First name' }}"
+          required
+          autocorrect="off"
+          autocapitalize="words"
+          class="tw:flex-1 tw:border tw:border-gray-300 tw:rounded tw:px-4 tw:py-2 tw:text-base tw:outline-none tw:focus:ring-2"
+        >
+        <input
+          type="email"
+          name="contact[email]"
+          id="newsletter-email"
+          placeholder="{{ block.settings.placeholder | default: 'Enter your email' }}"
+          required
+          autocorrect="off"
+          autocapitalize="off"
+          class="tw:flex-1 tw:border tw:border-gray-300 tw:rounded tw:px-4 tw:py-2 tw:text-base tw:outline-none tw:focus:ring-2"
+        >
+      </div>
+
+      <button
+        type="submit"
+        class="tw:bg-black tw:text-white tw:px-6 tw:py-2 tw:rounded tw:text-base tw:cursor-pointer tw:w-full"
+      >
+        {{ block.settings.button_label | default: 'Subscribe' }}
+      </button>
+    </div>
+
+    {% if form.errors %}
+      <div class="tw:text-red-500 tw:text-sm tw:mt-2">
+        {{ form.errors | default_errors }}
+      </div>
+    {% endif %}
+
+    {% if form.posted_successfully? %}
+      <div class="tw:text-green-600 tw:text-sm tw:mt-2">
+        {{ block.settings.success_message | default: 'Thanks for subscribing!' }}
+      </div>
+    {% endif %}
+  {% endform %}
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Subscribe to our newsletter"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Get the latest updates and offers."
+    },
+    {
+      "type": "text",
+      "id": "first_name_placeholder",
+      "label": "First Name Placeholder",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thanks for subscribing!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Form"
+    }
+  ]
+}
+{% endschema %}
