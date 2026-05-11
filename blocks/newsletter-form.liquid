@@ -7,7 +7,7 @@
   {% form 'customer', id: 'newsletter-form' %}
     <input type="hidden" name="contact[tags]" value="newsletter">
 
-    <div class="tw:flex tw:gap-3 tw:w-full">
+    <div class="tw:flex tw:md:flex-row tw:flex-col tw:gap-3 tw:w-full">
       <input
         type="text"
         name="contact[first_name]"
@@ -31,7 +31,7 @@
 
       <button
         type="submit"
-        class="tw:bg-[#2ed9e6] tw:text-black! tw:px-6 tw:py-2 tw:rounded-full tw:text-base tw:cursor-pointer tw:grow-0 tw:shrink tw:basis-0"
+        class="tw:bg-[#2ed9e6] tw:text-black! tw:px-6 tw:py-4 tw:rounded-full tw:text-base tw:cursor-pointer tw:grow-0 tw:shrink tw:basis-0"
       >
         {{ block.settings.button_label | default: 'Subscribe' }}
       </button>
