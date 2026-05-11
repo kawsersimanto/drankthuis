@@ -1510,14 +1510,14 @@
           "type": "group",
           "name": "row",
           "settings": {
-            "content_direction": "column",
+            "content_direction": "row",
             "vertical_on_mobile": true,
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "center",
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 42,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1557,9 +1557,9 @@
                 "align_baseline": false,
                 "horizontal_alignment_flex_direction_column": "flex-start",
                 "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
+                "gap": 32,
+                "width": "custom",
+                "custom_width": 80,
                 "width_mobile": "fill",
                 "custom_width_mobile": 100,
                 "height": "fit",
@@ -1597,7 +1597,7 @@
                     "align_baseline": false,
                     "horizontal_alignment_flex_direction_column": "flex-start",
                     "vertical_alignment_flex_direction_column": "center",
-                    "gap": 12,
+                    "gap": 8,
                     "width": "fill",
                     "custom_width": 100,
                     "width_mobile": "fill",
@@ -1688,8 +1688,7 @@
                   "type": "newsletter-form",
                   "name": "Newsletter Form",
                   "settings": {
-                    "heading": "Subscribe to our newsletter",
-                    "description": "Get the latest updates and offers.",
+                    "first_name_placeholder": "First name",
                     "placeholder": "Enter your email",
                     "button_label": "Subscribe",
                     "success_message": "Thanks for subscribing!"
@@ -1711,7 +1710,7 @@
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
                 "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
+                "horizontal_alignment_flex_direction_column": "flex-end",
                 "vertical_alignment_flex_direction_column": "center",
                 "gap": 12,
                 "width": "fill",
@@ -1741,7 +1740,34 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "image_Uw6yQc": {
+                  "type": "image",
+                  "name": "t:names.image",
+                  "settings": {
+                    "image": "shopify://shop_images/Vector_4.svg",
+                    "link": "",
+                    "image_ratio": "adapt",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "image_Uw6yQc"
+              ]
             }
           },
           "block_order": [
@@ -1766,7 +1792,7 @@
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
-        "color_scheme": "scheme-5",
+        "color_scheme": "scheme-b6a8e09e-7410-42a2-a834-af365daebabd",
         "background_media": "none",
         "video_position": "cover",
         "background_image_position": "cover",
