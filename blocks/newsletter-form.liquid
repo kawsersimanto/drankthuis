@@ -1,38 +1,37 @@
 {% doc %}
   A newsletter signup block that captures customer emails via Shopify's contact form.
 {% enddoc %}
+{{ 'newsletter-form.css' | asset_url | stylesheet_tag }}
 
 <div class="newsletter-form-block tw:flex tw:flex-col tw:gap-4">
   {% form 'customer', id: 'newsletter-form' %}
     <input type="hidden" name="contact[tags]" value="newsletter">
 
-    <div class="tw:flex tw:flex-col tw:gap-3">
-      <div class="tw:flex tw:flex-col tw:sm:flex-row tw:gap-3">
-        <input
-          type="text"
-          name="contact[first_name]"
-          id="newsletter-first-name"
-          placeholder="{{ block.settings.first_name_placeholder | default: 'First name' }}"
-          required
-          autocorrect="off"
-          autocapitalize="words"
-          class="tw:flex-1 tw:border tw:border-gray-300 tw:rounded tw:px-4 tw:py-2 tw:text-base tw:outline-none tw:focus:ring-2"
-        >
-        <input
-          type="email"
-          name="contact[email]"
-          id="newsletter-email"
-          placeholder="{{ block.settings.placeholder | default: 'Enter your email' }}"
-          required
-          autocorrect="off"
-          autocapitalize="off"
-          class="tw:flex-1 tw:border tw:border-gray-300 tw:rounded tw:px-4 tw:py-2 tw:text-base tw:outline-none tw:focus:ring-2"
-        >
-      </div>
+    <div class="tw:flex tw:gap-3 tw:w-full">
+      <input
+        type="text"
+        name="contact[first_name]"
+        id="newsletter-first-name"
+        placeholder="{{ block.settings.first_name_placeholder | default: 'First name' }}"
+        required
+        autocorrect="off"
+        autocapitalize="words"
+        class="tw:grow tw:shrink-0 tw:basis-0 tw:border tw:border-gray-300 tw:px-4 tw:py-3 tw:placeholder-slate-800! tw:text-slate-800! tw:text-base tw:outline-none tw:focus:ring-1 tw:bg-white! tw:rounded-full!"
+      >
+      <input
+        type="email"
+        name="contact[email]"
+        id="newsletter-email"
+        placeholder="{{ block.settings.placeholder | default: 'Enter your email' }}"
+        required
+        autocorrect="off"
+        autocapitalize="off"
+        class="tw:grow tw:shrink-0 tw:basis-0 tw:border tw:border-gray-300 tw:px-4 tw:py-3 tw:placeholder-slate-800! tw:text-slate-800! tw:text-base tw:outline-none tw:focus:ring-1 tw:bg-white! tw:rounded-full!"
+      >
 
       <button
         type="submit"
-        class="tw:bg-black tw:text-white tw:px-6 tw:py-2 tw:rounded tw:text-base tw:cursor-pointer tw:w-full"
+        class="tw:bg-[#2ed9e6] tw:text-black! tw:px-6 tw:py-2 tw:rounded-full tw:text-base tw:cursor-pointer tw:grow-0 tw:shrink tw:basis-0"
       >
         {{ block.settings.button_label | default: 'Subscribe' }}
       </button>
@@ -55,6 +54,7 @@
 {% schema %}
 {
   "name": "Newsletter Form",
+  "class": "newsletter-customer-block",
   "settings": [
     {
       "type": "text",
