@@ -1,0 +1,83 @@
+<div class="section section--page-width">
+  <ul class="tw:flex tw:justify-between tw:items-center">
+    {% for link in linklists['main-menu'].links %}
+      <li>
+        {%- comment -%} Find matching block for this link {%- endcomment -%}
+        {% assign matched_block = null %}
+        {% for block in section.blocks %}
+          {% if block.settings.menu_handle == link.handle %}
+            {% assign matched_block = block %}
+          {% endif %}
+        {% endfor %}
+
+        <a
+          href="{{ link.url }}"
+          data-menu-handle="{{ link.handle }}"
+          class="tw:flex tw:flex-col tw:items-center tw:gap-1.5"
+        >
+          {% if matched_block != null and matched_block.settings.image != blank %}
+            {% assign img = matched_block.settings.image %}
+            <img
+              src="{{ img | image_url: width: 400 }}"
+              alt="{{ img.alt | escape }}"
+              class="tw:h-15! tw:w-15! tw:object-contain"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
+            >
+          {% endif %}
+          {{ link.title }}
+        </a>
+
+        {% if link.links != blank %}
+          <ul class="tw:hidden">
+            {% for child_link in link.links %}
+              <li>
+                <a href="{{ child_link.url }}"> -{{ child_link.title }} </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Section",
+  "tag": "section",
+  "class": "custom-section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "menu_handle",
+          "label": "Menu Handle"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
+  "presets": [
+    {
+      "name": "Header Menu Section",
+      "blocks": [{ "type": "collection_card" }]
+    }
+  ]
+}
+{% endschema %}
