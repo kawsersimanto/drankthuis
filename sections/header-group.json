@@ -26,6 +26,7 @@
         },
         "header-menu": {
           "type": "_header-menu",
+          "disabled": true,
           "static": true,
           "settings": {
             "menu": "main-menu",
@@ -64,7 +65,7 @@
         "localization_row": "top",
         "section_width": "page-width",
         "section_height": "standard",
-        "enable_sticky_header": "always",
+        "enable_sticky_header": "never",
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
@@ -82,9 +83,93 @@
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default"
       }
+    },
+    "header_menu_iwApxA": {
+      "type": "header-menu",
+      "blocks": {
+        "collection_card_7t6YtW": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/fi_931949.svg",
+            "menu_handle": "beer"
+          }
+        },
+        "collection_card_dFCipG": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/fi_8081382.svg",
+            "menu_handle": "dairy"
+          }
+        },
+        "collection_card_gttema": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/fi_2447774.svg",
+            "menu_handle": "water"
+          }
+        },
+        "collection_card_LrkmWh": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147229234.svg",
+            "menu_handle": "soft-drinks"
+          }
+        },
+        "collection_card_4wVR6R": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/fi_6086675.svg",
+            "menu_handle": "coffee-tea"
+          }
+        },
+        "collection_card_ipfKgg": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147229236.svg",
+            "menu_handle": "cocktail"
+          }
+        },
+        "collection_card_7TD8nH": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147229235.svg",
+            "menu_handle": "energy-drink"
+          }
+        },
+        "collection_card_BGA8GJ": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2147229233.svg",
+            "menu_handle": "wine"
+          }
+        },
+        "collection_card_zBgPyQ": {
+          "type": "collection_card",
+          "settings": {
+            "image": "shopify://shop_images/fi_3361135.svg",
+            "menu_handle": "spirits"
+          }
+        }
+      },
+      "block_order": [
+        "collection_card_7t6YtW",
+        "collection_card_dFCipG",
+        "collection_card_gttema",
+        "collection_card_LrkmWh",
+        "collection_card_4wVR6R",
+        "collection_card_ipfKgg",
+        "collection_card_7TD8nH",
+        "collection_card_BGA8GJ",
+        "collection_card_zBgPyQ"
+      ],
+      "name": "Header Menu Section",
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   },
   "order": [
-    "header_section"
+    "header_section",
+    "header_menu_iwApxA"
   ]
 }
