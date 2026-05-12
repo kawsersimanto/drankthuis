@@ -1,4 +1,4 @@
-<div class="section section--page-width">
+<div class="section section--page-width tw:py-6">
   <ul class="tw:flex tw:justify-between tw:items-center">
     {% for link in linklists['main-menu'].links %}
       <li>
@@ -20,7 +20,7 @@
             <img
               src="{{ img | image_url: width: 400 }}"
               alt="{{ img.alt | escape }}"
-              class="tw:h-15! tw:w-15! tw:object-contain"
+              class="tw:h-12! tw:w-12! tw:object-contain"
               width="{{ img.width }}"
               height="{{ img.height }}"
             >

@@ -195,11 +195,23 @@
   .tw\:h-8 {
     height: calc(var(--tw-spacing) * 8);
   }
+  .tw\:h-10\! {
+    height: calc(var(--tw-spacing) * 10) !important;
+  }
+  .tw\:h-12\! {
+    height: calc(var(--tw-spacing) * 12) !important;
+  }
   .tw\:h-15\! {
     height: calc(var(--tw-spacing) * 15) !important;
   }
   .tw\:w-8 {
     width: calc(var(--tw-spacing) * 8);
+  }
+  .tw\:w-10\! {
+    width: calc(var(--tw-spacing) * 10) !important;
+  }
+  .tw\:w-12\! {
+    width: calc(var(--tw-spacing) * 12) !important;
   }
   .tw\:w-15\! {
     width: calc(var(--tw-spacing) * 15) !important;
@@ -300,6 +312,9 @@
   }
   .tw\:py-4 {
     padding-block: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:py-6 {
+    padding-block: calc(var(--tw-spacing) * 6);
   }
   .tw\:py-8 {
     padding-block: calc(var(--tw-spacing) * 8);
