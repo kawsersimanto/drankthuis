@@ -1,7 +1,9 @@
-<div class="section section--page-width tw:py-6">
+<script src="{{ 'navbar-mega-menu.js' | asset_url }}" defer></script>
+
+<div class="section section--page-width tw:pt-6 navbar-mega-menu tw:relative">
   <ul class="tw:flex tw:justify-between tw:items-center">
     {% for link in linklists['main-menu'].links %}
-      <li>
+      <li class="tw:grow" data-mega-menu-trigger>
         {%- comment -%} Find matching block for this link {%- endcomment -%}
         {% assign matched_block = null %}
         {% for block in section.blocks %}
@@ -13,7 +15,7 @@
         <a
           href="{{ link.url }}"
           data-menu-handle="{{ link.handle }}"
-          class="tw:flex tw:flex-col tw:items-center tw:gap-1.5"
+          class="tw:flex tw:flex-col tw:items-center tw:gap-1.5 tw:w-full"
         >
           {% if matched_block != null and matched_block.settings.image != blank %}
             {% assign img = matched_block.settings.image %}
@@ -29,18 +31,55 @@
         </a>
 
         {% if link.links != blank %}
-          <ul class="tw:hidden">
-            {% for child_link in link.links %}
-              <li>
-                <a href="{{ child_link.url }}"> -{{ child_link.title }} </a>
-              </li>
-            {% endfor %}
-          </ul>
+          <div class="section section--page-width tw:bg-white!" data-mega-menu-content>
+            <ul class="tw:grid tw:grid-cols-5 tw:gap-2.5">
+              {% for child_link in link.links %}
+                <li>
+                  <a
+                    href="{{ child_link.url }}"
+                    class="tw:flex tw:flex-col tw:gap-2 tw:items-center tw:justify-center tw:border tw:border-slate-200 tw:rounded tw:p-4"
+                  >
+                    <img
+                      src="{{ child_link.object.image | image_url }}"
+                      height="1000"
+                      width="1000"
+                      alt="{{ child_link.object.title }}"
+                      class="tw:h-20! tw:w-full! tw:object-contain"
+                    >
+                    {{ child_link.object.title }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
         {% endif %}
       </li>
     {% endfor %}
   </ul>
 </div>
+
+{% stylesheet %}
+  [data-mega-menu-content] {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 50;
+    width: 100%;
+    background: white;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 12px;
+    list-style: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  @media (max-width: 749px) {
+    .navbar-mega-menu {
+      display: none;
+    }
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
