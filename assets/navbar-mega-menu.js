@@ -2,108 +2,118 @@ document.addEventListener("DOMContentLoaded", () => {
   const triggers = document.querySelectorAll("[data-mega-menu-trigger]");
 
   let activeTrigger = null;
-  let closeTimeout = null;
+
+  const menuMap = new WeakMap();
 
   triggers.forEach((trigger) => {
     const content = trigger.querySelector("[data-mega-menu-content]");
     if (!content) return;
 
-    // --- Setup initial state ---
+    const items = content.querySelectorAll("li");
+
     gsap.set(content, {
+      autoAlpha: 0,
       y: -10,
       pointerEvents: "none",
-      position: "absolute",
     });
 
-    // --- Open ---
-    const openMenu = () => {
-      clearTimeout(closeTimeout);
-
-      // Close any previously open menu
-      if (activeTrigger && activeTrigger !== trigger) {
-        closeMenu(activeTrigger);
-      }
-
-      activeTrigger = trigger;
-
-      gsap.killTweensOf(content);
-      gsap.to(content, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.25,
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: {
         ease: "power2.out",
-        pointerEvents: "auto",
-      });
+      },
 
-      // Stagger children in
-      const items = content.querySelectorAll("li");
-      gsap.fromTo(
+      onStart: () => {
+        gsap.set(content, {
+          pointerEvents: "auto",
+        });
+      },
+
+      onReverseComplete: () => {
+        gsap.set(content, {
+          pointerEvents: "none",
+        });
+      },
+    });
+
+    tl.to(content, {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.25,
+    });
+
+    if (items.length) {
+      tl.fromTo(
         items,
-        { opacity: 0, y: 6 },
+        {
+          opacity: 0,
+          y: 6,
+        },
         {
           opacity: 1,
           y: 0,
-          duration: 0.2,
+          duration: 0.25,
           stagger: 0.04,
           ease: "power1.out",
-          delay: 0.05,
         },
+        "-=0.1",
       );
-    };
+    }
 
-    // --- Close ---
-    const closeMenu = (targetTrigger = trigger) => {
-      const targetContent = targetTrigger.querySelector(
-        "[data-mega-menu-content]",
-      );
-      if (!targetContent) return;
-
-      gsap.killTweensOf(targetContent);
-      gsap.to(targetContent, {
-        autoAlpha: 0,
-        y: -10,
-        duration: 0.18,
-        ease: "power2.in",
-        pointerEvents: "none",
-      });
-
-      if (activeTrigger === targetTrigger) activeTrigger = null;
-    };
-
-    // --- Events ---
-    trigger.addEventListener("mouseenter", openMenu);
-
-    trigger.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(() => {
-        closeMenu();
-      }, 100); // small delay so moving to child doesn't flicker
-    });
-
-    content.addEventListener("mouseenter", () => {
-      clearTimeout(closeTimeout);
-    });
-
-    content.addEventListener("mouseleave", () => {
-      closeTimeout = setTimeout(() => {
-        closeMenu();
-      }, 100);
+    menuMap.set(trigger, {
+      content,
+      tl,
     });
   });
 
-  // Close on outside click
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest("[data-mega-menu-trigger]") && activeTrigger) {
-      const content = activeTrigger.querySelector("[data-mega-menu-content]");
-      if (content) {
-        gsap.to(content, {
-          autoAlpha: 0,
-          y: -10,
-          duration: 0.18,
-          ease: "power2.in",
-          pointerEvents: "none",
-        });
-      }
+  const openMenu = (trigger) => {
+    if (activeTrigger && activeTrigger !== trigger) {
+      closeMenu(activeTrigger, true);
+    }
+
+    activeTrigger = trigger;
+
+    const data = menuMap.get(trigger);
+    if (!data) return;
+
+    data.tl.timeScale(1).play();
+  };
+
+  const closeMenu = (trigger = activeTrigger, instant = false) => {
+    if (!trigger) return;
+
+    const data = menuMap.get(trigger);
+    if (!data) return;
+
+    const { tl, content } = data;
+
+    if (instant) {
+      tl.pause().progress(0);
+
+      gsap.set(content, {
+        autoAlpha: 0,
+        y: -10,
+        pointerEvents: "none",
+      });
+    } else {
+      tl.timeScale(1.5).reverse();
+    }
+
+    if (activeTrigger === trigger) {
       activeTrigger = null;
     }
+  };
+
+  triggers.forEach((trigger) => {
+    if (!menuMap.has(trigger)) return;
+
+    // ONLY wrapper events
+    trigger.addEventListener("pointerenter", () => {
+      openMenu(trigger);
+    });
+
+    trigger.addEventListener("pointerleave", () => {
+      closeMenu(trigger);
+    });
   });
 });
