@@ -22,6 +22,7 @@
     --tw-text-3xl: 1.875rem;
     --tw-text-3xl--line-height: calc(2.25 / 1.875);
     --tw-font-weight-semibold: 600;
+    --tw-radius-md: 0.375rem;
     --tw-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --tw-default-transition-duration: 150ms;
     --tw-default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -268,11 +269,17 @@
   .tw\:items-center {
     align-items: center;
   }
+  .tw\:items-center\! {
+    align-items: center !important;
+  }
   .tw\:justify-between {
     justify-content: space-between;
   }
   .tw\:justify-center {
     justify-content: center;
+  }
+  .tw\:justify-center\! {
+    justify-content: center !important;
   }
   .tw\:gap-1\.5 {
     gap: calc(var(--tw-spacing) * 1.5);
@@ -280,14 +287,23 @@
   .tw\:gap-2 {
     gap: calc(var(--tw-spacing) * 2);
   }
+  .tw\:gap-2\! {
+    gap: calc(var(--tw-spacing) * 2) !important;
+  }
   .tw\:gap-2\.5 {
     gap: calc(var(--tw-spacing) * 2.5);
   }
   .tw\:gap-3 {
     gap: calc(var(--tw-spacing) * 3);
   }
+  .tw\:gap-3\! {
+    gap: calc(var(--tw-spacing) * 3) !important;
+  }
   .tw\:gap-4 {
     gap: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:gap-5\! {
+    gap: calc(var(--tw-spacing) * 5) !important;
   }
   .tw\:gap-6 {
     gap: calc(var(--tw-spacing) * 6);
@@ -307,11 +323,17 @@
   .tw\:rounded {
     border-radius: 0.25rem;
   }
+  .tw\:rounded\! {
+    border-radius: 0.25rem !important;
+  }
   .tw\:rounded-full {
     border-radius: calc(infinity * 1px);
   }
   .tw\:rounded-full\! {
     border-radius: calc(infinity * 1px) !important;
+  }
+  .tw\:rounded-md\! {
+    border-radius: var(--tw-radius-md) !important;
   }
   .tw\:border {
     border-style: var(--tw-border-style);
@@ -341,11 +363,20 @@
   .tw\:p-4 {
     padding: calc(var(--tw-spacing) * 4);
   }
+  .tw\:p-4\! {
+    padding: calc(var(--tw-spacing) * 4) !important;
+  }
   .tw\:px-4 {
     padding-inline: calc(var(--tw-spacing) * 4);
   }
+  .tw\:px-4\! {
+    padding-inline: calc(var(--tw-spacing) * 4) !important;
+  }
   .tw\:px-6 {
     padding-inline: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:py-2\! {
+    padding-block: calc(var(--tw-spacing) * 2) !important;
   }
   .tw\:py-3 {
     padding-block: calc(var(--tw-spacing) * 3);
@@ -361,6 +392,9 @@
   }
   .tw\:pt-6 {
     padding-top: calc(var(--tw-spacing) * 6);
+  }
+  .tw\:text-center {
+    text-align: center;
   }
   .tw\:text-3xl\! {
     font-size: var(--tw-text-3xl) !important;
