@@ -2,48 +2,51 @@
 
 <div class="section section--page-width tw:pt-6 navbar-mega-menu tw:relative">
   <ul class="tw:flex tw:justify-between tw:items-center">
-    {% comment %} {{ section.settings.nav_collections | json }} {% endcomment %}
-    {% assign nav_collections = section.settings.nav_collections %}
-    {% for col in nav_collections %}
-      {% assign sub_collections = col.metafields.custom.sub_collection.value %}
+    {% for link in linklists['main-menu'].links %}
       <li class="tw:grow" data-mega-menu-trigger>
+        {%- comment -%} Find matching block for this link {%- endcomment -%}
+        {% assign matched_block = null %}
+        {% for block in section.blocks %}
+          {% if block.settings.menu_handle == link.handle %}
+            {% assign matched_block = block %}
+          {% endif %}
+        {% endfor %}
+
         <a
-          href="{{ col.url }}"
+          href="{{ link.url }}"
+          data-menu-handle="{{ link.handle }}"
           class="tw:flex tw:flex-col tw:items-center tw:gap-1.5 tw:w-full"
         >
-          {% if col.image != blank %}
+          {% if matched_block != null and matched_block.settings.image != blank %}
+            {% assign img = matched_block.settings.image %}
             <img
-              src="{{ col.image | image_url: width: 400 }}"
-              alt="{{ col.image.alt | escape }}"
+              src="{{ img | image_url: width: 400 }}"
+              alt="{{ img.alt | escape }}"
               class="tw:h-12! tw:w-12! tw:object-contain"
-              width="{{ col.image.width }}"
-              height="{{ col.image.height }}"
+              width="{{ img.width }}"
+              height="{{ img.height }}"
             >
           {% endif %}
-          {{ col.title }}
+          {{ link.title }}
         </a>
 
-        {% if sub_collections != blank %}
+        {% if link.links != blank %}
           <div class="section section--page-width tw:bg-white!" data-mega-menu-content>
             <ul class="tw:grid tw:grid-cols-5 tw:gap-2.5">
-              {% for sub_col in sub_collections %}
+              {% for child_link in link.links %}
                 <li>
                   <a
-                    href="{{ sub_col.url }}"
+                    href="{{ child_link.url }}"
                     class="tw:flex tw:flex-col tw:gap-2 tw:items-center tw:justify-center tw:border tw:border-slate-200 tw:rounded tw:p-4"
                   >
-                    {% if sub_col.image != blank %}
-                      <img
-                        src="{{ sub_col.image | image_url: width: 1000 }}"
-                        height="1000"
-                        width="1000"
-                        alt="{{ sub_col.title }}"
-                        class="tw:h-20! tw:w-full! tw:object-contain"
-                      >
-                    {% else %}
-                      <div class="tw:h-20 tw:w-full tw:bg-slate-100 tw:rounded"></div>
-                    {% endif %}
-                    {{ sub_col.title }}
+                    <img
+                      src="{{ child_link.object.image | image_url }}"
+                      height="1000"
+                      width="1000"
+                      alt="{{ child_link.object.title }}"
+                      class="tw:h-20! tw:w-full! tw:object-contain"
+                    >
+                    {{ child_link.object.title }}
                   </a>
                 </li>
               {% endfor %}
@@ -76,28 +79,43 @@
       display: none;
     }
   }
-
-  .menu-drawer__link-image {
-    object-fit: contain !important;
-  }
 {% endstylesheet %}
 
 {% schema %}
 {
-  "name": "Navbar Mega Menu",
+  "name": "Custom Section",
   "tag": "section",
   "class": "custom-section",
   "settings": [
     {
-      "type": "collection_list",
-      "id": "nav_collections",
-      "label": "Navigation Collections",
-      "limit": 10
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
     }
   ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "menu_handle",
+          "label": "Menu Handle"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 9,
   "presets": [
     {
-      "name": "Navbar Mega Menu"
+      "name": "Header Menu Section",
+      "blocks": [{ "type": "collection_card" }]
     }
   ]
 }
