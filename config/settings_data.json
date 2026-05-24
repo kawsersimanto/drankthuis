@@ -88,13 +88,6 @@
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
-    "blocks": {
-      "9538154601924004449": {
-        "type": "shopify://apps/freshcredit-store-credit/blocks/fresh_credit/9882e3be-c415-43ad-965a-ba926daee7a6",
-        "disabled": false,
-        "settings": {}
-      }
-    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
