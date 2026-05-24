@@ -1282,7 +1282,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 60,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -1336,10 +1336,26 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "review_slider_XK8t7y": {
+              "type": "review-slider",
+              "name": "Review Slider",
+              "settings": {
+                "slides_mobile": 1,
+                "slides_sm": 2,
+                "slides_lg": 3,
+                "show_navigation": true,
+                "show_pagination": true,
+                "loop": true,
+                "autoplay": true,
+                "autoplay_speed": 4000
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "text_8VRdfP"
+            "text_8VRdfP",
+            "review_slider_XK8t7y"
           ]
         }
       },
