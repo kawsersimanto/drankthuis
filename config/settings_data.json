@@ -88,6 +88,80 @@
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
+    "blocks": {
+      "12046557757412368804": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/customer_account_page/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {
+          "style": "light",
+          "dropdownMenu": "slider",
+          "mobile_nav_offset_top": 0,
+          "shadow": true,
+          "border_radius": 4,
+          "background_color": "#ffffff",
+          "text_color": "#202202",
+          "primary_color": "#2ed9e6",
+          "btn_text_color": "#ffffff",
+          "max_width": 1200,
+          "custom_css": "",
+          "account_page": ""
+        }
+      },
+      "8409675092115237846": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/custom_forms/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {}
+      },
+      "11356494674496455976": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/loyalty/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {}
+      },
+      "6471712195879653093": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/social_logins/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {
+          "position": "below",
+          "divider": true,
+          "style": "icon_and_text",
+          "text_alignment": "center",
+          "icon_alignment": "left",
+          "icon_style": "white",
+          "border_radius": 4,
+          "spacing": 8,
+          "shadow": true,
+          "custom_css": ""
+        }
+      },
+      "11074193060611426105": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/product_wishlist/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {
+          "add_button_color": "#2ed9e6",
+          "add_button_text_color": "#ffffff",
+          "remove_button_color": "#2ed9e6",
+          "remove_button_text_color": "#ffffff",
+          "placement": "below_add_to_cart",
+          "product_css_selector": "",
+          "button_style": "icon_and_text",
+          "border_radius": 4,
+          "shadow": true,
+          "offset_top": 0,
+          "offset_bottom": 0,
+          "offset_left": 0,
+          "offset_right": 0,
+          "collections_wishlist_button": "overlay",
+          "collection_button_border_radius": 50,
+          "floating_link_placement": "right",
+          "floating_link_vertical_offset": 0,
+          "floating_link_lateral_offset": 0,
+          "floating_link_border_radius": 4,
+          "navigation_link": true,
+          "navigation_link_css_selector": "",
+          "custom_css": ""
+        }
+      }
+    },
     "color_schemes": {
       "scheme-1": {
         "settings": {
