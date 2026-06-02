@@ -189,6 +189,56 @@ class StickyAddToCartComponent extends Component {
     );
   }
 
+  /**
+   * Gets the deposit variant ID from the product form
+   * @returns {string | null} The deposit variant ID or null
+   */
+  #getDepositVariantId() {
+    const productForm = this.#getProductForm();
+    if (!productForm) return null;
+    return productForm.dataset.depositVariantId || null;
+  }
+
+  /**
+   * Updates cart when quantity changes to sync deposit quantity
+   * @param {number} newQuantity - The new quantity
+   * @returns {Promise<void>}
+   */
+  async #updateCartWithDepositSync(newQuantity) {
+    const variantId = this.dataset.currentVariantId;
+    const depositVariantId = this.#getDepositVariantId();
+
+    if (!variantId) return;
+
+    // If no deposit, skip
+    if (!depositVariantId) return;
+
+    try {
+      const response = await fetch("/cart.js");
+      const cart = await response.json();
+
+      const depositItem = cart.items.find(
+        (item) => item.variant_id.toString() === depositVariantId.toString(),
+      );
+
+      const updates = {
+        [variantId]: newQuantity,
+      };
+
+      if (depositItem) {
+        updates[depositVariantId] = newQuantity;
+      }
+
+      await fetch("/cart/update.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ updates }),
+      });
+    } catch (error) {
+      console.error("Failed to sync deposit quantity:", error);
+    }
+  }
+
   // Public action handlers
   /**
    * Handles the add to cart button click in the sticky bar
@@ -263,6 +313,12 @@ class StickyAddToCartComponent extends Component {
       this.dataset.currentVariantId = variant.id;
     }
 
+    // Update deposit variant ID if it changed
+    const newDepositVariantId = newStickyAddToCart.dataset.depositVariantId;
+    if (newDepositVariantId) {
+      this.dataset.depositVariantId = newDepositVariantId;
+    }
+
     // Re-cache the target add to cart button after morphing
     const productForm = this.#getProductForm();
     if (productForm) {
@@ -335,6 +391,9 @@ class StickyAddToCartComponent extends Component {
 
     this.#currentQuantity = event.detail.quantity;
     this.#updateButtonText();
+
+    // Sync deposit quantity when parent quantity changes
+    this.#updateCartWithDepositSync(event.detail.quantity);
   };
 
   /**
