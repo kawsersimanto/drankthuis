@@ -9,7 +9,6 @@ import {
 import { morph } from "@theme/morph";
 import { cartPerformance } from "@theme/performance";
 import {
-  fetchConfig,
   onAnimationEnd,
   preloadImage,
   yieldToMainThread,
@@ -318,6 +317,105 @@ class ProductFormComponent extends Component {
     }
   };
 
+  /**
+   * Builds cart payload including refundable deposit as nested cart line
+   * @param {FormData} formData - The original form data
+   * @returns {Promise<{items: Array, sections: string}>} Modified payload
+   */
+  async #buildCartPayloadWithDeposit(formData) {
+    const variantId = formData.get("id")?.toString();
+    const quantity = Number(formData.get("quantity")) || 1;
+    const sections = formData.get("sections")?.toString() || "";
+
+    const items = [
+      {
+        id: Number(variantId),
+        quantity: quantity,
+      },
+    ];
+
+    const depositVariantId = this.dataset.depositVariantId;
+
+    if (depositVariantId) {
+      items.push({
+        id: Number(depositVariantId),
+        quantity: quantity,
+        parent_id: Number(variantId),
+      });
+    }
+
+    return {
+      items,
+      sections,
+    };
+  }
+
+  /**
+   * Updates cart when parent product quantity changes to sync deposit quantity
+   * @param {string} parentVariantId - The parent product variant ID
+   * @param {number} newQuantity - The new quantity for the parent
+   * @returns {Promise<Cart | null>} The updated cart or null if fetch fails
+   */
+  async #updateCartWithDepositSync(parentVariantId, newQuantity) {
+    const depositVariantId = this.dataset.depositVariantId;
+
+    if (!depositVariantId) {
+      return await this.#standardCartUpdate(parentVariantId, newQuantity);
+    }
+
+    try {
+      const response = await fetch("/cart.js");
+      const cart = await response.json();
+
+      const depositItem = cart.items.find(
+        (item) => item.variant_id.toString() === depositVariantId.toString(),
+      );
+
+      const updates = {
+        [parentVariantId]: newQuantity,
+      };
+
+      if (depositItem) {
+        updates[depositVariantId] = newQuantity;
+      }
+
+      const updateResponse = await fetch("/cart/update.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ updates }),
+      });
+
+      const updatedCart = await updateResponse.json();
+      return updatedCart;
+    } catch (error) {
+      console.error("Failed to update cart with deposit sync:", error);
+      return null;
+    }
+  }
+
+  /**
+   * Standard cart update without deposit handling
+   * @param {string} variantId - The variant ID
+   * @param {number} quantity - The quantity
+   * @returns {Promise<Cart | null>} The updated cart or null
+   */
+  async #standardCartUpdate(variantId, quantity) {
+    try {
+      const response = await fetch("/cart/update.js", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          updates: { [variantId]: quantity },
+        }),
+      });
+
+      return await response.json();
+    } catch (error) {
+      console.error("Failed to update cart:", error);
+      return null;
+    }
+  }
+
   /** @param {Event} event */
   handleSubmit(event) {
     event.preventDefault();
@@ -444,15 +542,18 @@ class ProductFormComponent extends Component {
       formData.append("sections", cartItemComponentsSectionIds.join(","));
     });
 
-    const fetchCfg = fetchConfig("javascript", { body: formData });
-
-    fetch(Theme.routes.cart_add_url, {
-      ...fetchCfg,
-      headers: {
-        ...fetchCfg.headers,
-        Accept: "text/html",
-      },
-    })
+    // Build payload with nested deposit support
+    this.#buildCartPayloadWithDeposit(formData)
+      .then((payload) => {
+        return fetch(Theme.routes.cart_add_url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+      })
       .then((response) => response.json())
       .then(async (response) => {
         if (response.status) {

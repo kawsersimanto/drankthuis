@@ -47,6 +47,7 @@
       on:submit="/handleSubmit"
       data-quantity-default="{% if product.selected_or_first_available_variant.quantity_rule.min %}{{ product.selected_or_first_available_variant.quantity_rule.min }}{% else %}1{% endif %}"
       data-quantity-error-max="{{ 'products.product.quantity_error_max' | t }}"
+      data-deposit-variant-id="{{ product.metafields.custom.refundable_deposit.value.id }}"
     >
       <div
         class="visually-hidden"
