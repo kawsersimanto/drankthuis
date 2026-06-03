@@ -222,6 +222,11 @@
                 aria-label="{{ 'accessibility.cart' | t }}"
                 style="--header-height: 60px;"
               >
+                {% comment %} <scroll-hint
+                  class="cart-drawer__items"
+                >
+                </scroll-hint> {% endcomment %}
+                {% render 'shipping-progress-bar' %}
                 <scroll-hint
                   class="cart-drawer__items"
                 >

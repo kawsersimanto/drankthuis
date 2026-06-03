@@ -1903,6 +1903,23 @@
         "id": "drawer_drop_shadow",
         "label": "t:settings.drop_shadow",
         "default": false
+      },
+      {
+        "type": "header",
+        "content": "Shipping progress bar"
+      },
+      {
+        "type": "checkbox",
+        "id": "shipping_progress_bar_enabled",
+        "label": "Show shipping progress bar Enabled",
+        "default": false
+      },
+      {
+        "type": "number",
+        "id": "shipping_progress_bar_threshold",
+        "label": "Shipping progress bar threshold",
+        "default": 50,
+        "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
       }
     ]
   },
