@@ -40,6 +40,7 @@
     data-product-id="{{ product.id }}"
     on:submit="/handleSubmit"
     class="quick-add__product-form-component"
+    data-deposit-variant-id="{{ product.metafields.custom.refundable_deposit.value.id }}"
   >
     <div
       class="visually-hidden"
