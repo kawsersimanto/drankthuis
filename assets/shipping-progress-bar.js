@@ -1,5 +1,5 @@
 import { Component } from "@theme/component";
-import { ThemeEvents, CartUpdateEvent } from "@theme/events";
+import { CartUpdateEvent, ThemeEvents } from "@theme/events";
 
 /**
  * A custom element that displays and updates a shipping progress bar.
@@ -24,11 +24,8 @@ class ShippingProgressBar extends Component {
 
     this.#threshold = parseInt(this.dataset.threshold || "0", 10);
 
-    // Store the initial message as a template (contains translation)
     if (this.refs.message) {
       const initialMessage = this.refs.message.textContent || "";
-      // Extract template by replacing the amount with a placeholder
-      // This assumes the amount appears in the message
       this.#messageTemplate = initialMessage;
     }
 
@@ -41,7 +38,7 @@ class ShippingProgressBar extends Component {
     super.disconnectedCallback();
     document.removeEventListener(
       ThemeEvents.cartUpdate,
-      this.#handleCartUpdate
+      this.#handleCartUpdate,
     );
   }
 
@@ -70,16 +67,21 @@ class ShippingProgressBar extends Component {
     const remaining = this.#threshold - currentTotal;
     const progressPercentage = Math.min(
       100,
-      (currentTotal / this.#threshold) * 100
+      (currentTotal / this.#threshold) * 100,
     );
     const thresholdReached = remaining <= 0;
 
     // Update progress bar fill
     if (this.refs.fill) {
       this.refs.fill.style.setProperty("--progress", `${progressPercentage}%`);
+      // Also set on the track so the sibling SVG can read it
+      this.refs.fill.parentElement.style.setProperty(
+        "--progress",
+        `${progressPercentage}%`,
+      );
       this.refs.fill.setAttribute(
         "aria-valuenow",
-        String(Math.round(progressPercentage))
+        String(Math.round(progressPercentage)),
       );
     }
 
@@ -88,13 +90,13 @@ class ShippingProgressBar extends Component {
       if (thresholdReached) {
         this.refs.message.textContent = this.#getSuccessMessage();
         this.refs.message.classList.add(
-          "shipping-progress-bar__message--success"
+          "shipping-progress-bar__message--success",
         );
         this.setAttribute("data-threshold-reached", "");
       } else {
         this.refs.message.textContent = this.#getProgressMessage(remaining);
         this.refs.message.classList.remove(
-          "shipping-progress-bar__message--success"
+          "shipping-progress-bar__message--success",
         );
         this.removeAttribute("data-threshold-reached");
       }
@@ -113,12 +115,10 @@ class ShippingProgressBar extends Component {
    * @returns {string} The success message.
    */
   #getSuccessMessage() {
-    // Get from data attribute (set by Liquid with translation)
     const successMessage = this.dataset.successMessage;
     if (successMessage) {
       return successMessage;
     }
-    // Fallback
     return "You've unlocked free shipping!";
   }
 
@@ -128,22 +128,17 @@ class ShippingProgressBar extends Component {
    * @returns {string} The progress message.
    */
   #getProgressMessage(remaining) {
-    // Format remaining amount as currency
     const formattedAmount = this.#formatMoney(remaining);
 
-    // Try to use the stored template, replacing the old amount with the new one
     if (this.#messageTemplate) {
-      // Find and replace any money amount in the template with the new amount
-      // This regex matches common money formats ($X.XX, X.XX, etc.)
       const moneyPattern = /[\$]?[\d,]+\.?\d*/g;
       const updatedMessage = this.#messageTemplate.replace(
         moneyPattern,
-        formattedAmount
+        formattedAmount,
       );
       return updatedMessage;
     }
 
-    // Fallback if no template available
     return `Add ${formattedAmount} more for free shipping`;
   }
 
@@ -153,7 +148,6 @@ class ShippingProgressBar extends Component {
    * @returns {string} The formatted currency string.
    */
   #formatMoney(cents) {
-    // Use Shopify's money format if available
     // @ts-ignore - Shopify global is not in type definitions
     if (window.Shopify && typeof window.Shopify.formatMoney === "function") {
       // @ts-ignore - money_format is not in type definitions
@@ -163,7 +157,6 @@ class ShippingProgressBar extends Component {
       return window.Shopify.formatMoney(cents, moneyFormat);
     }
 
-    // Fallback formatting - basic dollar formatting
     const dollars = (cents / 100).toFixed(2);
     return `$${dollars}`;
   }

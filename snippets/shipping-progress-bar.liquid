@@ -58,19 +58,17 @@
           </p>
         {% endunless %}
 
-        <div class="shipping-progress-bar__track">
+        <div class="shipping-progress-bar__track" style="--progress: {{ progress_percentage }}%">
           <div
             class="shipping-progress-bar__fill"
-            style="--progress: {{ progress_percentage }}%"
             role="progressbar"
             aria-valuenow="{{ progress_percentage }}"
             aria-valuemin="0"
             aria-valuemax="100"
             aria-label="{{ 'accessibility.shipping_progress' | t }}"
             ref="fill"
-          >
-            {{- 'icon-shipping-truck.svg' | inline_asset_content -}}
-          </div>
+          ></div>
+          {{- 'icon-shipping-truck.svg' | inline_asset_content -}}
         </div>
       </div>
     </shipping-progress-bar>
