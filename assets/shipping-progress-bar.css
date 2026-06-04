@@ -3,6 +3,7 @@
   padding: var(--padding-md) var(--padding-lg);
   background-color: var(--color-background);
   border-bottom: 1px solid var(--color-border);
+  margin-bottom: 32px;
 }
 
 .shipping-progress-bar.hidden {
@@ -12,12 +13,11 @@
 .shipping-progress-bar__container {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-sm);
+  gap: var(--gap-xl);
 }
 
 .shipping-progress-bar__message {
   font-size: var(--cart-font-size--xs);
-  text-align: center;
   margin: 0;
   color: var(--color-foreground);
 }
@@ -33,7 +33,7 @@
   height: 8px;
   background-color: var(--color-border);
   border-radius: 4px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .shipping-progress-bar__fill {
@@ -42,9 +42,17 @@
   left: 0;
   height: 100%;
   width: var(--progress, 0%);
-  background-color: var(--color-primary);
+  background-color: #04a830;
   border-radius: 4px;
   transition: width 0.3s ease;
+}
+
+.shipping-progress-bar__fill svg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* transform: translate(-50%, -50%); */
+  width: 32px;
 }
 
 @media (prefers-reduced-motion: reduce) {

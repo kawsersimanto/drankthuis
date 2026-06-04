@@ -68,7 +68,9 @@
             aria-valuemax="100"
             aria-label="{{ 'accessibility.shipping_progress' | t }}"
             ref="fill"
-          ></div>
+          >
+            {{- 'icon-shipping-truck.svg' | inline_asset_content -}}
+          </div>
         </div>
       </div>
     </shipping-progress-bar>
