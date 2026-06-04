@@ -63,7 +63,8 @@
     "find_country": "Find country",
     "view_pricing_info": "View pricing information",
     "price_filter_low": "Low price",
-    "price_filter_high": "High price"
+    "price_filter_high": "High price",
+    "shipping_progress": "Shipping progress toward free shipping threshold"
   },
   "actions": {
     // Quick add button on product cards, shortened version of add to cart
@@ -319,7 +320,9 @@
     "recipient_form_fields_visible": "Recipient form fields are now visible",
     "recipient_form_fields_hidden": "Recipient form fields are now hidden",
     "recipient_form_error": "There was an error with the form submission",
-    "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} characters used"
+    "product_custom_property_character_count": "{{ used_chars }}/{{ max_chars }} characters used",
+    "add_more_for_free_shipping": "Add {{ amount }} more for free shipping",
+    "free_shipping_unlocked": "You've unlocked free shipping!"
   },
   "fields": {
     // Separates min and max values in price range filter
