@@ -431,7 +431,7 @@
   .language-selector {
     display: flex;
     gap: var(--gap-xs);
-    padding: var(--padding-md) var(--padding-lg);
+    padding: 0;
     position: relative;
     align-items: center;
     justify-content: space-between;
@@ -490,11 +490,11 @@
   }
 
   .language-selector--collapse-space .localization-form__select {
-    padding-inline-end: var(--icon-size-xs);
+    padding-inline-end: calc(var(--icon-size-xs) * 2);
   }
 
   .language-selector--collapse-space .svg-wrapper.icon-caret {
-    right: 0;
+    right: var(--icon-size-xs);
   }
 
   .localization-form .icon-checkmark {
