@@ -1,6 +1,6 @@
 {% liquid
   assign product = closest.product
-  assign deposit = product.metafields.custom.refund_value
+  assign deposit = product.metafields.custom.refundable_deposit.value.price
 -%}
 
 {% if deposit %}
@@ -28,7 +28,7 @@
     "
     {{ block.shopify_attributes }}
   >
-    Deposit: {{ deposit.value | money }}
+    Deposit: {{ deposit | money }}
   </p>
 {% endif %}
 
