@@ -1,8 +1,10 @@
 {% assign selected_collection = block.settings.collection %}
+{% assign sub_collections = selected_collection.metafields.custom.sub_collection.value %}
 {% assign border_width = block.settings.border_width %}
 {% assign border_color = block.settings.border_color %}
 {% assign border_radius = block.settings.border_radius %}
 {% assign image_size = block.settings.image_size %}
+{% assign active_color = block.settings.active_color %}
 
 <style>
   .category-filter {
@@ -14,17 +16,46 @@
   .category-filter .category-image {
     width: {{ image_size }}px;
     height: {{ image_size }}px;
+    border: 1px solid {{ border_color }};
+  }
+
+  /* Add active state styling */
+
+  .category-filter a {
+    position: relative;
+    z-index: 1;
+    padding-left: 20px;
+  }
+
+  .category-filter a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+    z-index: -1;
+  }
+
+  .category-filter a.active::before {
+    background-color: {{ active_color }};
+  }
+
+  .category-filter a.active {
+    color: {{ active_color }};
   }
 </style>
 
 <div class="category-filter tw:border tw:rounded-xl tw:p-5 tw:lg:flex tw:flex-col tw:gap-4 tw:border-solid tw:hidden">
   <p class="tw:text-lg">{{ block.settings.title }}</p>
   <div class="tw:flex tw:flex-col tw:gap-3">
-    {% if selected_collection and selected_collection.metafields.custom.sub_collection.value %}
-      {% for sub_collection in selected_collection.metafields.custom.sub_collection.value %}
+    {% if selected_collection and sub_collections %}
+      {% for sub_collection in sub_collections %}
         <a
           href="{{ sub_collection.url }}"
-          class="tw:flex tw:flex-row tw:gap-2 tw:items-center tw:transition-colors tw:duration-200 hover:tw:opacity-75"
+          class="tw:flex tw:flex-row tw:gap-2 tw:items-center tw:transition-colors tw:duration-300 tw:ease-in-out"
         >
           <img
             src="{{ sub_collection.image | image_url: width: 500 }}"
@@ -40,6 +71,34 @@
     {% endif %}
   </div>
 </div>
+
+{% javascript %}
+  document.addEventListener('DOMContentLoaded', function () {
+    // Get the current URL path
+    const currentPath = window.location.pathname;
+
+    // Extract collection handle from URL (e.g., "/collections/pils" -> "pils")
+    const urlCollectionMatch = currentPath.match(/\/collections\/([a-zA-Z0-9\-]+)/);
+    const urlCollection = urlCollectionMatch ? urlCollectionMatch[1] : null;
+
+    if (!urlCollection) return;
+
+    // Get all category filter links
+    const links = document.querySelectorAll('.category-filter a');
+
+    links.forEach((link) => {
+      // Extract collection handle from link href
+      const href = link.getAttribute('href');
+      const hrefCollectionMatch = href.match(/\/collections\/([a-zA-Z0-9\-]+)/);
+      const hrefCollection = hrefCollectionMatch ? hrefCollectionMatch[1] : null;
+
+      // Compare and add active class if they match
+      if (hrefCollection && hrefCollection === urlCollection) {
+        link.classList.add('active');
+      }
+    });
+  });
+{% endjavascript %}
 
 {% schema %}
 {
@@ -100,6 +159,16 @@
       "step": 5,
       "unit": "px",
       "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Active State Settings"
+    },
+    {
+      "type": "color",
+      "id": "active_color",
+      "label": "Active Text Color",
+      "default": "#000000"
     }
   ],
   "presets": [
