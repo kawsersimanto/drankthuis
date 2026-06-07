@@ -8,12 +8,14 @@
     --tw-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
     --tw-color-red-500: oklch(63.7% 0.237 25.331);
+    --tw-color-lime-400: oklch(84.1% 0.238 128.85);
     --tw-color-green-600: oklch(62.7% 0.194 149.214);
     --tw-color-slate-100: oklch(96.8% 0.007 247.896);
     --tw-color-slate-200: oklch(92.9% 0.013 255.508);
     --tw-color-slate-800: oklch(27.9% 0.041 260.031);
     --tw-color-gray-300: oklch(87.2% 0.01 258.338);
     --tw-color-gray-400: oklch(70.7% 0.022 261.325);
+    --tw-color-gray-500: oklch(55.1% 0.027 264.364);
     --tw-color-gray-600: oklch(44.6% 0.03 256.802);
     --tw-color-black: #000;
     --tw-color-white: #fff;
@@ -25,9 +27,19 @@
     --tw-text-base--line-height: calc(1.5 / 1);
     --tw-text-lg: 1.125rem;
     --tw-text-lg--line-height: calc(1.75 / 1.125);
+    --tw-text-xl: 1.25rem;
+    --tw-text-xl--line-height: calc(1.75 / 1.25);
+    --tw-text-2xl: 1.5rem;
+    --tw-text-2xl--line-height: calc(2 / 1.5);
     --tw-text-3xl: 1.875rem;
     --tw-text-3xl--line-height: calc(2.25 / 1.875);
+    --tw-font-weight-medium: 500;
     --tw-font-weight-semibold: 600;
+    --tw-tracking-tighter: -0.05em;
+    --tw-tracking-tight: -0.025em;
+    --tw-radius-lg: 0.5rem;
+    --tw-radius-xl: 0.75rem;
+    --tw-radius-2xl: 1rem;
     --tw-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --tw-default-transition-duration: 150ms;
     --tw-default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -220,6 +232,15 @@
   .tw\:h-8 {
     height: calc(var(--tw-spacing) * 8);
   }
+  .tw\:h-8\.5 {
+    height: calc(var(--tw-spacing) * 8.5);
+  }
+  .tw\:h-8\.5\! {
+    height: calc(var(--tw-spacing) * 8.5) !important;
+  }
+  .tw\:h-10\! {
+    height: calc(var(--tw-spacing) * 10) !important;
+  }
   .tw\:h-12\! {
     height: calc(var(--tw-spacing) * 12) !important;
   }
@@ -234,6 +255,15 @@
   }
   .tw\:w-8 {
     width: calc(var(--tw-spacing) * 8);
+  }
+  .tw\:w-8\.5 {
+    width: calc(var(--tw-spacing) * 8.5);
+  }
+  .tw\:w-8\.5\! {
+    width: calc(var(--tw-spacing) * 8.5) !important;
+  }
+  .tw\:w-10\! {
+    width: calc(var(--tw-spacing) * 10) !important;
   }
   .tw\:w-12\! {
     width: calc(var(--tw-spacing) * 12) !important;
@@ -274,14 +304,29 @@
   .tw\:cursor-pointer {
     cursor: pointer;
   }
+  .tw\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .tw\:grid-cols-5 {
     grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .tw\:grid-cols-\[250px_1fr\] {
+    grid-template-columns: 250px 1fr;
+  }
+  .tw\:grid-cols-\[repeat\(auto-fit\,minmax\(250px\,1fr\)\)\] {
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
   }
   .tw\:flex-col {
     flex-direction: column;
   }
+  .tw\:flex-row {
+    flex-direction: row;
+  }
   .tw\:items-center {
     align-items: center;
+  }
+  .tw\:items-start {
+    align-items: flex-start;
   }
   .tw\:justify-between {
     justify-content: space-between;
@@ -325,11 +370,20 @@
   .tw\:rounded {
     border-radius: 0.25rem;
   }
+  .tw\:rounded-2xl {
+    border-radius: var(--tw-radius-2xl);
+  }
   .tw\:rounded-full {
     border-radius: calc(infinity * 1px);
   }
   .tw\:rounded-full\! {
     border-radius: calc(infinity * 1px) !important;
+  }
+  .tw\:rounded-lg {
+    border-radius: var(--tw-radius-lg);
+  }
+  .tw\:rounded-xl {
+    border-radius: var(--tw-radius-xl);
   }
   .tw\:border {
     border-style: var(--tw-border-style);
@@ -344,6 +398,9 @@
   .tw\:bg-\[\#2ed9e6\] {
     background-color: #2ed9e6;
   }
+  .tw\:bg-lime-400 {
+    background-color: var(--tw-color-lime-400);
+  }
   .tw\:bg-slate-100 {
     background-color: var(--tw-color-slate-100);
   }
@@ -353,8 +410,14 @@
   .tw\:object-contain {
     object-fit: contain;
   }
+  .tw\:object-cover {
+    object-fit: cover;
+  }
   .tw\:p-4 {
     padding: calc(var(--tw-spacing) * 4);
+  }
+  .tw\:p-5 {
+    padding: calc(var(--tw-spacing) * 5);
   }
   .tw\:px-4 {
     padding-inline: calc(var(--tw-spacing) * 4);
@@ -377,6 +440,10 @@
   .tw\:text-center {
     text-align: center;
   }
+  .tw\:text-2xl {
+    font-size: var(--tw-text-2xl);
+    line-height: var(--tw-leading, var(--tw-text-2xl--line-height));
+  }
   .tw\:text-3xl\! {
     font-size: var(--tw-text-3xl) !important;
     line-height: var(--tw-leading, var(--tw-text-3xl--line-height)) !important;
@@ -389,6 +456,10 @@
     font-size: var(--tw-text-base) !important;
     line-height: var(--tw-leading, var(--tw-text-base--line-height)) !important;
   }
+  .tw\:text-lg {
+    font-size: var(--tw-text-lg);
+    line-height: var(--tw-leading, var(--tw-text-lg--line-height));
+  }
   .tw\:text-lg\! {
     font-size: var(--tw-text-lg) !important;
     line-height: var(--tw-leading, var(--tw-text-lg--line-height)) !important;
@@ -397,15 +468,34 @@
     font-size: var(--tw-text-sm);
     line-height: var(--tw-leading, var(--tw-text-sm--line-height));
   }
+  .tw\:text-xl {
+    font-size: var(--tw-text-xl);
+    line-height: var(--tw-leading, var(--tw-text-xl--line-height));
+  }
+  .tw\:font-medium {
+    --tw-font-weight: var(--tw-font-weight-medium);
+    font-weight: var(--tw-font-weight-medium);
+  }
   .tw\:font-semibold {
     --tw-font-weight: var(--tw-font-weight-semibold);
     font-weight: var(--tw-font-weight-semibold);
+  }
+  .tw\:tracking-tight {
+    --tw-tracking: var(--tw-tracking-tight);
+    letter-spacing: var(--tw-tracking-tight);
+  }
+  .tw\:tracking-tighter {
+    --tw-tracking: var(--tw-tracking-tighter);
+    letter-spacing: var(--tw-tracking-tighter);
   }
   .tw\:text-black\! {
     color: var(--tw-color-black) !important;
   }
   .tw\:text-gray-400 {
     color: var(--tw-color-gray-400);
+  }
+  .tw\:text-gray-500 {
+    color: var(--tw-color-gray-500);
   }
   .tw\:text-gray-600 {
     color: var(--tw-color-gray-600);
@@ -443,6 +533,13 @@
   .tw\:outline-none {
     --tw-outline-style: none;
     outline-style: none;
+  }
+  .tw\:hover\:underline {
+    &:hover {
+      @media (hover: hover) {
+        text-decoration-line: underline;
+      }
+    }
   }
   .tw\:focus\:ring-1 {
     &:focus {
@@ -507,6 +604,10 @@
   initial-value: solid;
 }
 @property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-tracking {
   syntax: "*";
   inherits: false;
 }
@@ -588,6 +689,7 @@
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
       --tw-font-weight: initial;
+      --tw-tracking: initial;
       --tw-duration: initial;
       --tw-ease: initial;
       --tw-shadow: 0 0 #0000;

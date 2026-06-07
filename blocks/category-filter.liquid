@@ -1,0 +1,48 @@
+{% assign selected_collection = block.settings.collection %}
+
+<div class="tw:border tw:border-border tw:rounded-xl tw:p-5 tw:flex tw:flex-col tw:gap-4">
+  <p class="tw:text-lg">{{ block.settings.title }}</p>
+  <div class="tw:flex tw:flex-col tw:gap-3">
+    {% if selected_collection and selected_collection.metafields.custom.sub_collection.value %}
+      {% for sub_collection in selected_collection.metafields.custom.sub_collection.value %}
+        <a
+          href="{{ sub_collection.url }}"
+          class="tw:flex tw:flex-row tw:gap-2 tw:items-center"
+        >
+          <img
+            src="{{ sub_collection.image | image_url: width: 500 }}"
+            height="100"
+            width="100"
+            alt="{{ sub_collection.title }}"
+            class="tw:w-10! tw:h-10! tw:object-contain"
+          >
+          <p class="tw:font-medium">{{ sub_collection.title }}</p>
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Category Filter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Categories"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Filter"
+    }
+  ]
+}
+{% endschema %}
