@@ -25,7 +25,7 @@
             "slideshow_mobile_controls_style": "thumbnails",
             "thumbnail_position": "bottom",
             "thumbnail_width": 44,
-            "thumbnail_radius": 8,
+            "thumbnail_radius": 2,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -502,6 +502,11 @@
           ]
         }
       },
+      "custom_css": [
+        ".product-media__image {height: 100%; object-fit: contain !important;}",
+        "slideshow-container {border: 1px solid #d4d4d4; border-radius: var(--media-radius, 0) !important; overflow: hidden !important;}",
+        ".slideshow-controls__thumbnails .slideshow-control[aria-selected=\"true\"] {outline: var(--focus-outline-width) solid #c4c4c4 !important;}"
+      ],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -511,7 +516,7 @@
         "enable_sticky_add_to_cart": true,
         "color_scheme": "scheme-1",
         "padding-block-start": 32,
-        "padding-block-end": 0
+        "padding-block-end": 32
       }
     },
     "product_recommendations_qggXJq": {
