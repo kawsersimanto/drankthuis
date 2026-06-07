@@ -71,6 +71,8 @@
       ],
       "name": "Collection heading",
       "settings": {
+        "hide_on_mobile": false,
+        "show_on_mobile_only": false,
         "content_direction": "column",
         "vertical_on_mobile": true,
         "horizontal_alignment": "flex-start",
@@ -205,12 +207,40 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "product_deposit_GnyLGt": {
+              "type": "product-deposit",
+              "name": "Product Deposit",
+              "settings": {
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "1em",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "deposit_color": "#000000",
+                "deposit_opacity": 100,
+                "font_weight": "400",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "product_card_gallery_REnqJV",
             "product_title_4nY4eT",
-            "price_EzJzMm"
+            "price_EzJzMm",
+            "product_deposit_GnyLGt"
           ]
         }
       },
