@@ -23,14 +23,14 @@
 {% comment %} We always render this full-width, as the child blocks have width: page/full settings {% endcomment %}
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div class="section product-grid-container">
-  <div class="">
+  <div class="tw:mb-12">
     {% content_for 'block',
       type: 'filters',
       id: 'filters',
       results: collection,
       results_size: collection.products_count
     %}
-    <div class="tw:grid tw:grid-cols-[250px_1fr] tw:gap-4 tw:items-start">
+    <div class="tw:grid tw:lg:grid-cols-[250px_1fr] grid-cols-1 tw:gap-4 tw:items-start">
       {% content_for 'blocks' %}
       <div>
         <results-list

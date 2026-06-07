@@ -103,6 +103,15 @@
     "main": {
       "type": "main-collection",
       "blocks": {
+        "category_filter_qQqtzT": {
+          "type": "category-filter",
+          "name": "Category Filter",
+          "settings": {
+            "title": "Categories",
+            "collection": "bier"
+          },
+          "blocks": {}
+        },
         "filters": {
           "type": "filters",
           "static": true,
@@ -114,7 +123,7 @@
             "show_swatch_label": false,
             "show_filter_label": false,
             "enable_sorting": true,
-            "enable_grid_density": true,
+            "enable_grid_density": false,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "padding-block-start": 8,
@@ -244,6 +253,9 @@
           ]
         }
       },
+      "block_order": [
+        "category_filter_qQqtzT"
+      ],
       "settings": {
         "layout_type": "grid",
         "product_card_size": "medium",

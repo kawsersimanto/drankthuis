@@ -202,11 +202,32 @@
   .tw\:static\! {
     position: static !important;
   }
+  .tw\:sticky {
+    position: sticky;
+  }
+  .tw\:top-5 {
+    top: calc(var(--tw-spacing) * 5);
+  }
+  .tw\:top-8 {
+    top: calc(var(--tw-spacing) * 8);
+  }
+  .tw\:top-10 {
+    top: calc(var(--tw-spacing) * 10);
+  }
+  .tw\:top-24 {
+    top: calc(var(--tw-spacing) * 24);
+  }
   .tw\:z-0\! {
     z-index: 0 !important;
   }
   .tw\:mt-2 {
     margin-top: calc(var(--tw-spacing) * 2);
+  }
+  .tw\:mb-8 {
+    margin-bottom: calc(var(--tw-spacing) * 8);
+  }
+  .tw\:mb-12 {
+    margin-bottom: calc(var(--tw-spacing) * 12);
   }
   .tw\:line-clamp-4 {
     overflow: hidden;
@@ -389,6 +410,10 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .tw\:border-solid {
+    --tw-border-style: solid;
+    border-style: solid;
+  }
   .tw\:border-gray-300 {
     border-color: var(--tw-color-gray-300);
   }
@@ -517,10 +542,19 @@
       color: var(--tw-color-slate-800) !important;
     }
   }
+  .tw\:transition-colors {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to;
+    transition-timing-function: var(--tw-ease, var(--tw-default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--tw-default-transition-duration));
+  }
   .tw\:transition-opacity {
     transition-property: opacity;
     transition-timing-function: var(--tw-ease, var(--tw-default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--tw-default-transition-duration));
+  }
+  .tw\:duration-200 {
+    --tw-duration: 200ms;
+    transition-duration: 200ms;
   }
   .tw\:duration-300 {
     --tw-duration: 300ms;
@@ -592,9 +626,24 @@
       padding-bottom: calc(var(--tw-spacing) * 12);
     }
   }
+  .tw\:lg\:block {
+    @media (width >= 64rem) {
+      display: block;
+    }
+  }
+  .tw\:lg\:flex {
+    @media (width >= 64rem) {
+      display: flex;
+    }
+  }
   .tw\:lg\:w-280 {
     @media (width >= 64rem) {
       width: calc(var(--tw-spacing) * 280);
+    }
+  }
+  .tw\:lg\:grid-cols-\[250px_1fr\] {
+    @media (width >= 64rem) {
+      grid-template-columns: 250px 1fr;
     }
   }
 }

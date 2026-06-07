@@ -1,20 +1,38 @@
 {% assign selected_collection = block.settings.collection %}
+{% assign border_width = block.settings.border_width %}
+{% assign border_color = block.settings.border_color %}
+{% assign border_radius = block.settings.border_radius %}
+{% assign image_size = block.settings.image_size %}
 
-<div class="tw:border tw:border-border tw:rounded-xl tw:p-5 tw:flex tw:flex-col tw:gap-4">
+<style>
+  .category-filter {
+    border-width: {{ border_width }}px;
+    border-color: {{ border_color }};
+    border-radius: {{ border_radius }}px;
+  }
+
+  .category-filter .category-image {
+    width: {{ image_size }}px;
+    height: {{ image_size }}px;
+  }
+</style>
+
+<div class="category-filter tw:border tw:rounded-xl tw:p-5 tw:lg:flex tw:flex-col tw:gap-4 tw:border-solid tw:hidden">
   <p class="tw:text-lg">{{ block.settings.title }}</p>
   <div class="tw:flex tw:flex-col tw:gap-3">
     {% if selected_collection and selected_collection.metafields.custom.sub_collection.value %}
       {% for sub_collection in selected_collection.metafields.custom.sub_collection.value %}
         <a
           href="{{ sub_collection.url }}"
-          class="tw:flex tw:flex-row tw:gap-2 tw:items-center"
+          class="tw:flex tw:flex-row tw:gap-2 tw:items-center tw:transition-colors tw:duration-200 hover:tw:opacity-75"
         >
           <img
             src="{{ sub_collection.image | image_url: width: 500 }}"
-            height="100"
-            width="100"
             alt="{{ sub_collection.title }}"
-            class="tw:w-10! tw:h-10! tw:object-contain"
+            loading="lazy"
+            height="500"
+            width="500"
+            class="category-image tw:object-contain"
           >
           <p class="tw:font-medium">{{ sub_collection.title }}</p>
         </a>
@@ -26,6 +44,7 @@
 {% schema %}
 {
   "name": "Category Filter",
+  "class": "tw:sticky tw:top-5",
   "settings": [
     {
       "type": "text",
@@ -37,6 +56,50 @@
       "type": "collection",
       "id": "collection",
       "label": "Collection"
+    },
+    {
+      "type": "header",
+      "content": "Border Settings"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border Width (px)",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#e5e7eb"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border Radius (px)",
+      "min": 0,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Image Size (px)",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 40
     }
   ],
   "presets": [
