@@ -123,11 +123,11 @@
 
           <tbody role="rowgroup">
             {% for item in cart.items %}
+              {% if item.parent_relationship.parent != null %}{% continue %}{% endif %}
               <tr
                 role="row"
-                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% unless item.unit_price_measurement %} cart-items__table-row--full-width-variants{% endunless %}"
+                class="cart-items__table-row{% unless item.unit_price_measurement %} cart-items__table-row--full-width-variants{% endunless %}"
                 ref="cartItemRows[]"
-                data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
               >
                 <td
@@ -171,9 +171,6 @@
                       <a
                         href="{{ item.url }}"
                         class="cart-items__title"
-                        {% if item.parent_relationship.parent != null %}
-                          aria-label="{{ 'accessibility.nested_product' | t: product_title: item.product.title, parent_title: item.parent_relationship.parent.title | escape }}"
-                        {% endif %}
                       >
                         {{- item.product.title -}}
                       </a>
@@ -197,84 +194,81 @@
                       </ul>
                     {%- endif -%}
                   </div>
+                  <div class="tw:col-span-2!">
+                    <div class="tw:flex tw:flex-col tw:gap-1">
+                      <span class="tw:leading-4">
+                        {{ item.product.metafields.custom.unit }}
+                      </span>
+                      <span class="tw:font-semibold cart-refundable-deposit tw:leading-4">
+                        {{ 'content.cart_refundable_deposit' | t }}:
+                        {{ item.product.metafields.custom.refundable_deposit.value.price | money }}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="cart-items__variants-wrapper">
+                    {%- if item.product.has_only_default_variant == false
+                      or item.properties.size != 0
+                      or item.selling_plan_allocation != null
+                    -%}
+                      {%- if item.product.has_only_default_variant == false and item.item_components.size == 0 -%}
+                        <dl class="cart-items__variants">
+                          {%- for option in item.options_with_values -%}
+                            <div class="cart-items__variant">
+                              <dt class="visually-hidden">{{ option.name }}:</dt>
+                              <dd>
+                                {{- option.value -}}
+                                {%- if forloop.last != true %},&nbsp;{% endif -%}
+                              </dd>
+                            </div>
+                          {%- endfor -%}
+                        </dl>
+                      {%- endif -%}
 
-                  {% comment %}
-                    <div class="cart-items__variants-wrapper">
-                      {%- if item.product.has_only_default_variant == false
-                        or item.properties.size != 0
-                        or item.selling_plan_allocation != null
+                      {%- liquid
+                        assign has_visible_properties = false
+                        for property in item.properties
+                          assign property_first_char = property.first | slice: 0
+                          if property.last != blank and property_first_char != '_'
+                            assign has_visible_properties = true
+                            break
+                          endif
+                        endfor
                       -%}
-                        {%- if item.product.has_only_default_variant == false and item.item_components.size == 0 -%}
-                          <dl class="cart-items__variants">
-                            {%- for option in item.options_with_values -%}
-                              <div class="cart-items__variant">
-                                <dt class="visually-hidden">{{ option.name }}:</dt>
+                      {%- if has_visible_properties -%}
+                        <dl class="cart-items__properties">
+                          {%- for property in item.properties -%}
+                            {%- assign property_first_char = property.first | slice: 0 -%}
+                            {%- if property.last != blank and property_first_char != '_' -%}
+                              <div class="cart-items__property">
+                                <dt>{{ property.first }}:</dt>
                                 <dd>
-                                  {{- option.value -}}
-                                  {%- if forloop.last != true %},&nbsp;{% endif -%}
+                                  {%- if property.last contains '/uploads/' -%}
+                                    <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                                  {%- else -%}
+                                    {{ property.last }}
+                                  {%- endif -%}
                                 </dd>
                               </div>
-                            {%- endfor -%}
-                          </dl>
-                        {%- endif -%}
-
-                        {%- liquid
-                          assign has_visible_properties = false
-                          for property in item.properties
-                            assign property_first_char = property.first | slice: 0
-                            if property.last != blank and property_first_char != '_'
-                              assign has_visible_properties = true
-                              break
-                            endif
-                          endfor
-                        -%}
-                        {%- if has_visible_properties -%}
-                          <dl class="cart-items__properties">
-                            {%- for property in item.properties -%}
-                              {%- assign property_first_char = property.first | slice: 0 -%}
-                              {%- if property.last != blank and property_first_char != '_' -%}
-                                <div class="cart-items__property">
-                                  <dt>{{ property.first }}:</dt>
-                                  <dd>
-                                    {%- if property.last contains '/uploads/' -%}
-                                      <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
-                                    {%- else -%}
-                                      {{ property.last }}
-                                    {%- endif -%}
-                                  </dd>
-                                </div>
-                              {%- endif -%}
-                            {%- endfor -%}
-                          </dl>
-                        {%- endif -%}
-
-                        {%- if item.selling_plan_allocation -%}
-                          <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
-                        {%- endif -%}
-
-                        {%- if item.line_level_discount_allocations.size > 0 -%}
-                          <ul
-                            class="list-unstyled"
-                            role="list"
-                          >
-                            {%- for discount in item.line_level_discount_allocations -%}
-                              <li>{{ discount.discount_application.title | escape }}</li>
-                            {%- endfor -%}
-                          </ul>
-                        {%- endif -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </dl>
                       {%- endif -%}
-                    </div>
-                  {% endcomment %}
 
-                  <div class="cart-items__unit-price-wrapper">
-                    {% if item.properties.unit %}
-                      <div>{{ item.properties.unit }}</div>
-                    {% endif %}
-                    {% if item.properties.refund_rule != blank %}
-                      <p class="tw:font-semibold cart-refundable-deposit">
-                        Refundable Deposit: {{ item.properties.refund_rule | money }}
-                      </p>
-                    {% endif %}
+                      {%- if item.selling_plan_allocation -%}
+                        <p>{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                      {%- endif -%}
+
+                      {%- if item.line_level_discount_allocations.size > 0 -%}
+                        <ul
+                          class="list-unstyled"
+                          role="list"
+                        >
+                          {%- for discount in item.line_level_discount_allocations -%}
+                            <li>{{ discount.discount_application.title | escape }}</li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    {%- endif -%}
                   </div>
                 </td>
                 <td
@@ -282,7 +276,6 @@
                   role="cell"
                   headers="quantity"
                 >
-                  {% # Here I want to pass some arguments to the quantity block so it knows which value should the input be set to. Though quantity block could be a snippet instead %}
                   {% assign can_update_quantity = item.instructions.can_update_quantity
                     | default: true, allow_false: true
                   %}
@@ -350,7 +343,7 @@
                   role="cell"
                   headers="productTotal"
                 >
-                  <text-component value="{{ price | strip_html }}">{{ price }}</text-component>
+                  <text-component class="tw:font-semibold" value="{{ price | strip_html }}">{{ price }}</text-component>
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}

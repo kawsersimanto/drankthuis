@@ -212,6 +212,12 @@
   .tw\:z-0\! {
     z-index: 0 !important;
   }
+  .tw\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+  .tw\:col-span-2\! {
+    grid-column: span 2 / span 2 !important;
+  }
   .tw\:mt-2 {
     margin-top: calc(var(--tw-spacing) * 2);
   }
