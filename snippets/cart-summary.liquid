@@ -56,7 +56,8 @@
       <span class="cart-totals__total-label cart-primary-typography tw:font-medium!">
         {{ 'content.cart_credit' | t }}
       </span>
-      {% if customer and customer.store_credit_account %}
+      {% if customer %}
+        {{ customer | json }}
         <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
           <strong>{{ customer.store_credit_account.balance | money }}</strong>
         </span>
@@ -191,14 +192,6 @@
     </div>
   {% endif %}
 
-  {%- liquid
-    if settings.currency_code_enabled_cart_total
-      assign total_price = cart.total_price | money_with_currency
-    else
-      assign total_price = cart.total_price | money
-    endif
-  -%}
-
   {% comment %}
     <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
         <span class="cart-totals__item cart-totals__total" role="status">
@@ -241,7 +234,7 @@
         {{ 'content.checkout' | t }}
         <span class="tw:flex tw:flex-col">
           <span class="tw:text-sm">
-            {{ parent_subtotal }}
+            {{ parent_subtotal | money }}
           </span>
           <span class="tw:text-[10px]"> Excl. Deposit </span>
         </span>
