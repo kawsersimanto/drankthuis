@@ -216,6 +216,7 @@
     "delivery_fee": "Levering",
     "cart_login": "Inloggen",
     "cart_credit": "Winkelkrediet",
+    "cart_deposit_exclude": "Excl. leeggoed",
     "duties_and_taxes_included_shipping_at_checkout_with_policy_without_discounts_html": "Douanerechten en belastingen inbegrepen. Verzendkosten worden berekend bij de checkout.",
     "duties_and_taxes_included_shipping_at_checkout_without_policy_without_discounts": "Douanerechten en belastingen inbegrepen. Verzendkosten worden berekend bij de checkout.",
     "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_without_discounts_html": "Douanerechten inbegrepen. Verzendkosten worden berekend bij de checkout.",

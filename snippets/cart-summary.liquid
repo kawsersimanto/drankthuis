@@ -57,8 +57,14 @@
         {{ 'content.cart_credit' | t }}
       </span>
       {% if customer %}
+        {% assign store_credit = customer.store_credit_account %}
         <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
-          -{{ customer.store_credit_account.balance | money }}
+          -
+          {% if store_credit and store_credit.balance %}
+            {{ store_credit.balance | money }}
+          {% else %}
+            {{ 0 | money }}
+          {% endif %}
         </span>
       {% else %}
         <a href="{{ routes.account_login_url }}" class="tw:underline! tw:decoration-inherit! tw:font-semibold">
@@ -235,7 +241,7 @@
           <span class="tw:text-sm">
             {{ parent_subtotal | money }}
           </span>
-          <span class="tw:text-[10px]"> Excl. Deposit </span>
+          <span class="tw:text-[10px]">{{ 'content.cart_deposit_exclude' | t }}</span>
         </span>
       </span>
     </button>
