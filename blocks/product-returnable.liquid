@@ -1,0 +1,44 @@
+{% liquid
+  assign product = closest.product
+  assign deposit = product.metafields.custom.refundable_deposit.value.price
+-%}
+
+{% stylesheet %}
+  .refundable-icon svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .refundable-icon svg path {
+    fill: #2f2f2fa6;
+  }
+{% endstylesheet %}
+
+{% if deposit %}
+  <div class="tw:flex tw:gap-2 tw:items-center">
+    <div class="tw:shrink-0 refundable-icon">
+      {{- 'refundable-icon.svg' | inline_asset_content -}}
+    </div>
+    <span>
+      {{ 'content.returnable' | t }}
+    </span>
+    <span>|</span>
+    <span> {{ 'content.refundable_deposit' | t }}: </span>
+    {{ deposit | money }}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Returnable Deposit",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Returnable Deposit",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}
