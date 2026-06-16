@@ -515,6 +515,18 @@
   .tw\:uppercase\! {
     text-transform: uppercase !important;
   }
+  .tw\:underline {
+    text-decoration-line: underline;
+  }
+  .tw\:underline\! {
+    text-decoration-line: underline !important;
+  }
+  .tw\:decoration-inherit {
+    text-decoration-color: inherit;
+  }
+  .tw\:decoration-inherit\! {
+    text-decoration-color: inherit !important;
+  }
   .tw\:placeholder-slate-800\! {
     &::placeholder {
       color: var(--tw-color-slate-800) !important;

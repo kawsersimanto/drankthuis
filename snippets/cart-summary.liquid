@@ -51,6 +51,22 @@
       </span>
     </span>
 
+    {% comment %} REFUNDABLE DEPOSIT {% endcomment %}
+    <span class="cart-totals__item cart-totals__deposit">
+      <span class="cart-totals__total-label cart-primary-typography tw:font-medium!">
+        {{ 'content.cart_credit' | t }}
+      </span>
+      {% if customer and customer.store_credit_account %}
+        <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
+          <strong>{{ customer.store_credit_account.balance | money }}</strong>
+        </span>
+      {% else %}
+        <a href="{{ routes.account_login_url }}" class="tw:underline! tw:decoration-inherit! tw:font-semibold">
+          {{ 'content.cart_login' | t }}
+        </a>
+      {% endif %}
+    </span>
+
     {% comment %} DELIVERY FEE ROW {% endcomment %}
     <span class="cart-totals__item cart-totals__shipping">
       <span class="cart-totals__total-label cart-primary-typography">
@@ -210,26 +226,40 @@
 </div>
 
 <div class="cart__ctas">
-  <button
-    type="submit"
-    id="checkout"
-    class="cart__checkout-button button"
-    name="checkout"
-    {% if cart == empty %}
-      disabled
-    {% endif %}
-    form="cart-form"
-  >
-    <span class="tw:text-base tw:font-semibold tw:flex tw:justify-between tw:items-center">
-      {{ 'content.checkout' | t }}
-      <span class="tw:flex tw:flex-col">
-        <span class="tw:text-sm">
-          {{ total_price }}
+  {% if customer %}
+    <button
+      type="submit"
+      id="checkout"
+      class="cart__checkout-button button"
+      name="checkout"
+      {% if cart == empty %}
+        disabled
+      {% endif %}
+      form="cart-form"
+    >
+      <span class="tw:text-base tw:font-semibold tw:flex tw:justify-between tw:items-center">
+        {{ 'content.checkout' | t }}
+        <span class="tw:flex tw:flex-col">
+          <span class="tw:text-sm">
+            {{ total_price }}
+          </span>
+          <span class="tw:text-[10px]"> Excl. Deposit </span>
         </span>
-        <span class="tw:text-[10px]"> Excl. Deposit </span>
       </span>
-    </span>
-  </button>
+    </button>
+  {% else %}
+    <a
+      href="{{ routes.account_login_url }}"
+      class="cart__checkout-button button tw:font-semibold! tw:text-base!"
+      name="checkout"
+      {% if cart == empty %}
+        disabled
+      {% endif %}
+      form="cart-form"
+    >
+      {{ 'content.cart_login' | t }}
+    </a>
+  {% endif %}
 
   {% if additional_checkout_buttons and settings.show_accelerated_checkout_buttons %}
     <div
