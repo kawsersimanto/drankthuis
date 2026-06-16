@@ -57,9 +57,8 @@
         {{ 'content.cart_credit' | t }}
       </span>
       {% if customer %}
-        {{ customer | json }}
         <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
-          <strong>{{ customer.store_credit_account.balance | money }}</strong>
+          -{{ customer.store_credit_account.balance | money }}
         </span>
       {% else %}
         <a href="{{ routes.account_login_url }}" class="tw:underline! tw:decoration-inherit! tw:font-semibold">
