@@ -50,7 +50,7 @@
 .shipping-progress-bar__track svg {
   position: absolute;
   top: 50%;
-  left: var(--progress, 0%);
+  left: clamp(16px, var(--progress, 0%), calc(100% - 16px));
   transform: translate(-50%, -50%);
   width: 32px;
   transition: left 0.3s ease;

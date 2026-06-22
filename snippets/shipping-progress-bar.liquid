@@ -6,6 +6,10 @@
     assign progress_percentage = current_total | times: 100 | divided_by: threshold_cents
     assign progress_percentage = progress_percentage | at_most: 100
 
+    if current_total == 0
+      assign progress_percentage = 2
+    endif
+
     if remaining <= 0
       assign threshold_reached = true
     else

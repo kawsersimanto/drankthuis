@@ -65,10 +65,9 @@ class ShippingProgressBar extends Component {
     }
 
     const remaining = this.#threshold - currentTotal;
-    const progressPercentage = Math.min(
-      100,
-      (currentTotal / this.#threshold) * 100,
-    );
+    const rawPercentage = (currentTotal / this.#threshold) * 100;
+    const progressPercentage =
+      currentTotal > 0 ? Math.min(100, rawPercentage) : 2;
     const thresholdReached = remaining <= 0;
 
     // Update progress bar fill
