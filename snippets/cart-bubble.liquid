@@ -5,6 +5,13 @@
   count will be displayed as "99+".
 {%- enddoc -%}
 
+{%- assign parent_items = 0 -%}
+{%- for item in cart.items -%}
+  {%- if item.parent_relationship == blank -%}
+    {%- assign parent_items = parent_items | plus: 1 -%}
+  {%- endif -%}
+{%- endfor -%}
+
 <div
   ref="cartBubble"
   class="cart-bubble{% if cart == empty %} visually-hidden{% endif %}"
@@ -25,8 +32,10 @@
       aria-hidden="true"
       data-testid="cart-bubble"
     >
-      {%- if limit == blank or cart.item_count < limit %}
-        {{- cart.item_count -}}
+      {%- if limit == blank or parent_items < limit -%}
+        {{- parent_items -}}
+      {%- else -%}
+        99+
       {%- endif -%}
     </span>
   </span>
