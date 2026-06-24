@@ -256,7 +256,9 @@
       {% endif %}
       form="cart-form"
     >
-      <span class="tw:text-base tw:font-semibold tw:flex tw:justify-between tw:items-center">
+      <span
+        class="tw:text-base tw:font-semibold tw:flex {% if minimum_reached == false %} tw:justify-center {% else %} tw:justify-between {% endif %} tw:items-center"
+      >
         {% if minimum_reached == false %}
           {{ 'content.minimum_order_not_reached' | t }}
         {% else %}
