@@ -73,11 +73,13 @@
           ref="message"
         >
           {%- if bar_state == 'free-shipping' -%}
-            You get Free Delivery!!!
+            {{ 'content.shipping_progress_free_delivery_unlocked' | t }}
           {%- elsif bar_state == 'above-minimum' -%}
-            Only {{ remaining_to_free | money }} away from Free Delivery
+            {%- assign formatted_remaining = remaining_to_free | money -%}
+            {{ 'content.shipping_progress_away_from_free_delivery' | t: amount: formatted_remaining }}
           {%- else -%}
-            Only {{ remaining_to_minimum | money }} away from Minimum order
+            {%- assign formatted_remaining = remaining_to_minimum | money -%}
+            {{ 'content.shipping_progress_away_from_minimum' | t: amount: formatted_remaining }}
           {%- endif -%}
         </p>
       </div>

@@ -587,7 +587,19 @@
     "y_position": "Verticale positie",
     "enable_sticky_add_to_cart": "Vaste 'Toevoegen aan winkelwagen'-balk",
     "sticky_add_to_cart": "Vaste 'Toevoegen aan winkelwagen'-balk",
-    "actions_display_style": "Menustijl"
+    "actions_display_style": "Menustijl",
+    "shipping_progress_bar_header": {
+      "content": "Verzendvoortgangsbalk"
+    },
+    "shipping_progress_bar_enabled": {
+      "label": "Verzendvoortgangsbalk weergeven"
+    },
+    "shipping_progress_bar_minimum_amount": {
+      "label": "Minimaal bestelbedrag"
+    },
+    "shipping_progress_bar_threshold": {
+      "label": "Drempel voor gratis verzending"
+    }
   },
   "options": {
     "apple": "Apple",

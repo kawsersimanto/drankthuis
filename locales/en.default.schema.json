@@ -1174,7 +1174,19 @@
     "cs_slider_inner_color": "Slider inner color",
     "text_on_images": "Text on images",
     "x_position": "Horizontal position",
-    "y_position": "Vertical position"
+    "y_position": "Vertical position",
+    "shipping_progress_bar_header": {
+      "content": "Shipping progress bar"
+    },
+    "shipping_progress_bar_enabled": {
+      "label": "Show shipping progress bar"
+    },
+    "shipping_progress_bar_minimum_amount": {
+      "label": "Minimum order amount"
+    },
+    "shipping_progress_bar_threshold": {
+      "label": "Free shipping threshold"
+    }
   },
   "text_defaults": {
     "accordion_heading": "Accordion heading",

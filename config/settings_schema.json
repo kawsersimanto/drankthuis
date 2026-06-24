@@ -1906,25 +1906,25 @@
       },
       {
         "type": "header",
-        "content": "Shipping progress bar"
+        "content": "t:settings.shipping_progress_bar_header.content"
       },
       {
         "type": "checkbox",
         "id": "shipping_progress_bar_enabled",
-        "label": "Show shipping progress bar Enabled",
+        "label": "t:settings.shipping_progress_bar_enabled.label",
         "default": false
       },
       {
         "type": "number",
         "id": "shipping_progress_bar_minimum_amount",
-        "label": "Minimum shipping amount",
+        "label": "t:settings.shipping_progress_bar_minimum_amount.label",
         "default": 50,
         "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
       },
       {
         "type": "number",
         "id": "shipping_progress_bar_threshold",
-        "label": "Shipping progress bar threshold",
+        "label": "t:settings.shipping_progress_bar_threshold.label",
         "default": 100,
         "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
       }
