@@ -183,6 +183,7 @@
     "cart_login": "Log in",
     "cart_credit": "Store credit",
     "cart_deposit_exclude": "Excl. deposit",
+    "minimum_order_not_reached": "Minimum order not reached",
     "shipping_discount_error": "Shipping discounts are shown at checkout after adding an address",
     "discount_code_error": "Discount code cannot be applied to your cart",
     "discounts": "Discounts",

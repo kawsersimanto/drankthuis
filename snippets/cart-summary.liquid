@@ -258,7 +258,7 @@
     >
       <span class="tw:text-base tw:font-semibold tw:flex tw:justify-between tw:items-center">
         {% if minimum_reached == false %}
-          Minimum Order not reached
+          {{ 'content.minimum_order_not_reached' | t }}
         {% else %}
           {{ 'content.checkout' | t }}
           <span class="tw:flex tw:flex-col">
