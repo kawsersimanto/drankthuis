@@ -92,24 +92,6 @@
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "blocks": {
-      "12046557757412368804": {
-        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/customer_account_page/3c495b68-652c-468d-a0ef-5bad6935d104",
-        "disabled": false,
-        "settings": {
-          "style": "light",
-          "dropdownMenu": "slider",
-          "mobile_nav_offset_top": 0,
-          "shadow": true,
-          "border_radius": 4,
-          "background_color": "#ffffff",
-          "text_color": "#202202",
-          "primary_color": "#2ed9e6",
-          "btn_text_color": "#ffffff",
-          "max_width": 1200,
-          "custom_css": "",
-          "account_page": ""
-        }
-      },
       "8409675092115237846": {
         "type": "shopify://apps/froonze-loyalty-wishlist/blocks/custom_forms/3c495b68-652c-468d-a0ef-5bad6935d104",
         "disabled": false,
@@ -162,6 +144,24 @@
           "navigation_link": true,
           "navigation_link_css_selector": "",
           "custom_css": ""
+        }
+      },
+      "12046557757412368804": {
+        "type": "shopify://apps/froonze-loyalty-wishlist/blocks/customer_account_page/3c495b68-652c-468d-a0ef-5bad6935d104",
+        "disabled": false,
+        "settings": {
+          "style": "light",
+          "dropdownMenu": "slider",
+          "mobile_nav_offset_top": 0,
+          "shadow": true,
+          "border_radius": 4,
+          "background_color": "#ffffff",
+          "text_color": "#202202",
+          "primary_color": "#2ed9e6",
+          "btn_text_color": "#ffffff",
+          "max_width": 1200,
+          "custom_css": "",
+          "account_page": "account"
         }
       }
     },
@@ -604,10 +604,10 @@
           "primary_hover": "#000000",
           "border": "#0000000f",
           "shadow": "#000000",
-          "primary_button_background": "#2ED9E6",
+          "primary_button_background": "#2ed9e6",
           "primary_button_text": "#000000",
           "primary_button_border": "#000000",
-          "primary_button_hover_background": "#2ED9E6",
+          "primary_button_hover_background": "#2ed9e6",
           "primary_button_hover_text": "#000000",
           "primary_button_hover_border": "#000000",
           "secondary_button_background": "rgba(0,0,0,0)",
