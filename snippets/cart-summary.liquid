@@ -43,8 +43,13 @@
 
     {% comment %} REFUNDABLE DEPOSIT {% endcomment %}
     <span class="cart-totals__item cart-totals__deposit">
-      <span class="cart-totals__total-label cart-primary-typography tw:font-medium!">
+      <span
+        class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5"
+      >
         {{ 'content.cart_refundable_deposit' | t }}
+        <span class="store-notice-tooltip" data-tooltip="{{shop.metafields.custom.refundable_deposit_notice }}">
+          {{- 'info.svg' | inline_asset_content -}}
+        </span>
       </span>
       <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
         {{ total_refundable_deposit | money }}
@@ -53,18 +58,17 @@
 
     {% comment %} REFUNDABLE DEPOSIT {% endcomment %}
     <span class="cart-totals__item cart-totals__deposit">
-      <span class="cart-totals__total-label cart-primary-typography tw:font-medium!">
+      <span class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5">
         {{ 'content.cart_credit' | t }}
+        <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.refundable_deposit_notice }}">
+          {{- 'info.svg' | inline_asset_content -}}
+        </span>
       </span>
+
       {% if customer %}
-        {% assign store_credit = customer.store_credit_account %}
         <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
-          -
-          {% if store_credit and store_credit.balance %}
-            {{ store_credit.balance | money }}
-          {% else %}
-            {{ 0 | money }}
-          {% endif %}
+          {%- assign balance = customer.store_credit_account.balance -%}
+          -{{ balance | default: 0 | money }}
         </span>
       {% else %}
         <a href="{{ routes.account_login_url }}" class="tw:underline! tw:decoration-inherit! tw:font-semibold">
@@ -75,8 +79,11 @@
 
     {% comment %} DELIVERY FEE ROW {% endcomment %}
     <span class="cart-totals__item cart-totals__shipping">
-      <span class="cart-totals__total-label cart-primary-typography">
+      <span class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5">
         {{ 'content.delivery_fee' | t }}
+        <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.refundable_deposit_notice }}">
+          {{- 'info.svg' | inline_asset_content -}}
+        </span>
       </span>
       <span class="cart-totals__shipping-value cart-secondary-typography">
         {%- if shipping_discount != blank -%}
@@ -590,5 +597,46 @@
     .cart-summary--extend {
       height: 100%;
     }
+  }
+
+  .store-notice-tooltip {
+    position: relative;
+    font-size: 0.75rem;
+  }
+
+  .store-notice-tooltip:before {
+    opacity: 0;
+    content: attr(data-tooltip);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: max-content;
+    max-width: 200px;
+    transform: translate(-50%, -100%);
+    padding: 5px 10px;
+    background-color: #fff;
+    box-shadow: 0 0 2px var(--color-border);
+    border-radius: 5px;
+    color: #5e5e5e;
+    pointer-events: none;
+    line-height: 1em;
+    text-align: center;
+    justify-content: center;
+    border: 1px solid var(--color-border);
+    transition: 0.3s;
+  }
+
+  .store-notice-tooltip:hover:before {
+    opacity: 1;
+  }
+
+  .store-notice-tooltip svg {
+    --tooltip-icon-size: 14px;
+    width: var(--tooltip-icon-size);
+    height: var(--tooltip-icon-size);
+  }
+
+  .cart-drawer__summary {
+    mask-image: none !important;
   }
 {% endstylesheet %}
