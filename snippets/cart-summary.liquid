@@ -47,22 +47,26 @@
         class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5"
       >
         {{ 'content.cart_refundable_deposit' | t }}
-        <span class="store-notice-tooltip" data-tooltip="{{shop.metafields.custom.refundable_deposit_notice }}">
-          {{- 'info.svg' | inline_asset_content -}}
-        </span>
+        {% if shop.metafields.custom.refundable_deposit_notice != blank %}
+          <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.refundable_deposit_notice }}">
+            {{- 'info.svg' | inline_asset_content -}}
+          </span>
+        {% endif %}
       </span>
       <span class="cart-totals__total-value cart-secondary-typography tw:font-medium!">
         {{ total_refundable_deposit | money }}
       </span>
     </span>
 
-    {% comment %} REFUNDABLE DEPOSIT {% endcomment %}
+    {% comment %} STORE CREDITS {% endcomment %}
     <span class="cart-totals__item cart-totals__deposit">
       <span class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5">
         {{ 'content.cart_credit' | t }}
-        <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.refundable_deposit_notice }}">
-          {{- 'info.svg' | inline_asset_content -}}
-        </span>
+        {% if shop.metafields.custom.store_credits_notice != blank %}
+          <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.store_credits_notice }}">
+            {{- 'info.svg' | inline_asset_content -}}
+          </span>
+        {% endif %}
       </span>
 
       {% if customer %}
@@ -81,9 +85,11 @@
     <span class="cart-totals__item cart-totals__shipping">
       <span class="cart-totals__total-label cart-primary-typography tw:font-medium! tw:flex! tw:items-center tw:gap-1.5">
         {{ 'content.delivery_fee' | t }}
-        <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.refundable_deposit_notice }}">
-          {{- 'info.svg' | inline_asset_content -}}
-        </span>
+        {% if shop.metafields.custom.delivery_fee_notice != blank %}
+          <span class="store-notice-tooltip" data-tooltip="{{ shop.metafields.custom.delivery_fee_notice }}">
+            {{- 'info.svg' | inline_asset_content -}}
+          </span>
+        {% endif %}
       </span>
       <span class="cart-totals__shipping-value cart-secondary-typography">
         {%- if shipping_discount != blank -%}
@@ -634,6 +640,7 @@
     --tooltip-icon-size: 14px;
     width: var(--tooltip-icon-size);
     height: var(--tooltip-icon-size);
+    opacity: 0.6;
   }
 
   .cart-drawer__summary {
