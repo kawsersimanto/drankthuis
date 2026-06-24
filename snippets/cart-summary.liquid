@@ -478,6 +478,10 @@
     gap: var(--checkout-button-gap);
     grid-auto-flow: row;
     grid-template-columns: 1fr;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
   }
 
   .cart__ctas .cart__checkout-button {
@@ -659,5 +663,6 @@
 
   .cart-drawer__summary {
     mask-image: none !important;
+    padding-bottom: 0 !important;
   }
 {% endstylesheet %}
