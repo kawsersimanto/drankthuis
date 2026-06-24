@@ -1186,6 +1186,12 @@
     },
     "shipping_progress_bar_threshold": {
       "label": "Free shipping threshold"
+    },
+    "shipping_progress_minimum_color": {
+      "label": "Minimum order color"
+    },
+    "shipping_progress_free_shipping_color": {
+      "label": "Free shipping color"
     }
   },
   "text_defaults": {

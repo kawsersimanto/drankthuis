@@ -599,6 +599,12 @@
     },
     "shipping_progress_bar_threshold": {
       "label": "Drempel voor gratis verzending"
+    },
+    "shipping_progress_minimum_color": {
+      "label": "Kleur bij minimumbedrag"
+    },
+    "shipping_progress_free_shipping_color": {
+      "label": "Kleur bij gratis verzending"
     }
   },
   "options": {
