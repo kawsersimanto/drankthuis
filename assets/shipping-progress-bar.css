@@ -13,7 +13,7 @@
 .shipping-progress-bar__container {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xl);
+  gap: var(--gap-sm);
 }
 
 .shipping-progress-bar__message {
@@ -42,9 +42,14 @@
   left: 0;
   height: 100%;
   width: var(--progress, 0%);
-  background-color: #04a830;
+  background-color: var(
+    --spb-fill-color,
+    #e07b2a
+  ); /* now driven by state, falls back to orange */
   border-radius: 4px;
-  transition: width 0.3s ease;
+  transition:
+    width 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .shipping-progress-bar__track svg {
@@ -75,4 +80,15 @@
   .shipping-progress-bar__track {
     height: 6px;
   }
+}
+
+/* ─── State-driven fill colors ─────────────────────────────────────────────── */
+
+.shipping-progress-bar__track[data-state="below-minimum"] {
+  --spb-fill-color: #e07b2a; /* orange — below minimum order */
+}
+
+.shipping-progress-bar__track[data-state="above-minimum"],
+.shipping-progress-bar__track[data-state="free-shipping"] {
+  --spb-fill-color: #04a830; /* green — minimum met or free shipping unlocked */
 }

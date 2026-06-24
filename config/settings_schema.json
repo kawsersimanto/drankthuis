@@ -1916,9 +1916,16 @@
       },
       {
         "type": "number",
+        "id": "shipping_progress_bar_minimum_amount",
+        "label": "Minimum shipping amount",
+        "default": 50,
+        "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
+      },
+      {
+        "type": "number",
         "id": "shipping_progress_bar_threshold",
         "label": "Shipping progress bar threshold",
-        "default": 50,
+        "default": 100,
         "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
       }
     ]

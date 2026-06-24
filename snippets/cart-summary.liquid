@@ -28,6 +28,14 @@
   endfor
 -%}
 
+{%- liquid
+  assign minimum_cents = settings.shipping_progress_bar_minimum_amount | times: 100
+  assign minimum_reached = true
+  if cart.total_price < minimum_cents
+    assign minimum_reached = false
+  endif
+-%}
+
 <div class="cart-totals">
   <div class="cart-totals__original-container cart-primary-typography tw:py-2.5 tw:px-4 tw:rounded-xl tw:bg-[#f3f3f3]">
     {% comment %} SUBTOTAL (always shown) {% endcomment %}
@@ -243,19 +251,23 @@
       id="checkout"
       class="cart__checkout-button button"
       name="checkout"
-      {% if cart == empty %}
+      {% if cart == empty or minimum_reached == false %}
         disabled
       {% endif %}
       form="cart-form"
     >
       <span class="tw:text-base tw:font-semibold tw:flex tw:justify-between tw:items-center">
-        {{ 'content.checkout' | t }}
-        <span class="tw:flex tw:flex-col">
-          <span class="tw:text-sm">
-            {{ parent_subtotal | money }}
+        {% if minimum_reached == false %}
+          Minimum Order not reached
+        {% else %}
+          {{ 'content.checkout' | t }}
+          <span class="tw:flex tw:flex-col">
+            <span class="tw:text-sm">
+              {{ parent_subtotal | money }}
+            </span>
+            <span class="tw:text-[10px]">{{ 'content.cart_deposit_exclude' | t }}</span>
           </span>
-          <span class="tw:text-[10px]">{{ 'content.cart_deposit_exclude' | t }}</span>
-        </span>
+        {% endif %}
       </span>
     </button>
   {% else %}
