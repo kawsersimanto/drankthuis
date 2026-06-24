@@ -1927,6 +1927,20 @@
         "label": "t:settings.shipping_progress_bar_threshold.label",
         "default": 100,
         "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
+      },
+      {
+        "type": "color",
+        "id": "shipping_progress_minimum_color",
+        "label": "Minimum order color",
+        "default": "#e07b2a",
+        "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
+      },
+      {
+        "type": "color",
+        "id": "shipping_progress_free_shipping_color",
+        "label": "Free shipping color",
+        "default": "#53e5a9",
+        "visible_if": "{{ settings.shipping_progress_bar_enabled == true }}"
       }
     ]
   },

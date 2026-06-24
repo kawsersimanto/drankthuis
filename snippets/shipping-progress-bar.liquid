@@ -1,4 +1,11 @@
 {%- if settings.shipping_progress_bar_enabled and settings.cart_type == 'drawer' -%}
+  <style>
+    .shipping-progress-bar__track {
+        --spb-below-minimum-color: {{ settings.shipping_progress_minimum_color }};
+        --spb-above-minimum-color: {{ settings.shipping_progress_free_shipping_color }};
+      }
+  </style>
+
   {%- liquid
     assign minimum_cents = settings.shipping_progress_bar_minimum_amount | times: 100
     assign threshold_cents = settings.shipping_progress_bar_threshold | times: 100
