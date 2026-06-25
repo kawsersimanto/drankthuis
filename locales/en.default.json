@@ -248,6 +248,8 @@
     "product_subtotal": "Product subtotal",
     "product_total": "Product total",
     "product_badge_sold_out": "Sold out",
+    "product_badge_new": "New",
+    "product_badge_save": "Save",
     "product_badge_sale": "Sale",
     "product_card_placeholder": "Product title",
     "placeholder_image": "Placeholder image",

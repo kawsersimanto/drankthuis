@@ -15,7 +15,7 @@
     {% if days_since <= 20 %}{% assign is_new = true %}{% endif %}
 
     <div
-      class="product-badges product-badges--{{ settings.badge_position }}"
+      class="product-badges product-badges--{{ settings.badge_position }} tw:flex tw:flex-col tw:gap-1 tw:items-start"
       style="
         --badge-border-radius: {{ settings.badge_corner_radius }}px;
         --badge-font-family: var(--font-{{ settings.badge_font_family }}--family);
@@ -31,17 +31,19 @@
         <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sold_out_color_scheme }}">
           {{ 'content.product_badge_sold_out' | t }}
         </div>
+      {%- endif -%}
 
       {% comment %} Sale badge + Save amount {% endcomment %}
-      {%- elsif product.compare_at_price > product.price -%}
+      {%- if product.compare_at_price > product.price -%}
         <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_sale_color_scheme }}">
-          Save {{ savings | money }}
+          {{ 'content.product_badge_save' | t }} {{ savings | money }}
         </div>
+      {%- endif -%}
 
       {% comment %} New badge — only shown if not on sale {% endcomment %}
-      {%- elsif is_new -%}
+      {%- if is_new -%}
         <div class="product-badges__badge product-badges__badge--rectangle color-{{ settings.badge_new_color_scheme | default: settings.badge_sale_color_scheme }}">
-          New
+          {{ 'content.product_badge_new' | t }}
         </div>
       {%- endif -%}
     </div>

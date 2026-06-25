@@ -167,6 +167,8 @@
     "shipping_policy_html": "<a href=\"{{ link }}\">Verzendkosten</a> worden berekend bij de checkout.",
     "taxes_included": "Belastingen inbegrepen.",
     "product_badge_sold_out": "Uitverkocht",
+    "product_badge_new": "Nieuw",
+    "product_badge_save": "Bespaar",
     "product_badge_sale": "Uitverkoop",
     "search_input_label": "Zoeken",
     "search_input_placeholder": "Zoekopdracht",
