@@ -199,10 +199,12 @@
                       <span class="tw:leading-4">
                         {{ item.product.metafields.custom.unit }}
                       </span>
-                      <span class="tw:font-semibold cart-refundable-deposit tw:leading-4">
-                        {{ 'content.cart_refundable_deposit' | t }}:
-                        {{ item.product.metafields.custom.refundable_deposit.value.price | money }}
-                      </span>
+                      {% if item.product.metafields.custom.refundable_deposit.value.price != blank %}
+                        <span class="tw:font-semibold cart-refundable-deposit tw:leading-4">
+                          {{ 'content.cart_refundable_deposit' | t }}:
+                          {{ item.product.metafields.custom.refundable_deposit.value.price | money }}
+                        </span>
+                      {% endif %}
                     </div>
                   </div>
                   <div class="cart-items__variants-wrapper">
