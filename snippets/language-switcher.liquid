@@ -1,0 +1,139 @@
+<script
+  src="{{ 'language-switcher.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>
+
+<language-switcher>
+  {% form 'localization' %}
+    <input
+      type="hidden"
+      name="locale_code"
+      value="{{ localization.language.iso_code }}"
+    >
+
+    <button
+      type="button"
+      class="ls-trigger"
+      aria-haspopup="listbox"
+      aria-expanded="false"
+      aria-label="Select language"
+    >
+      <span>{{ localization.language.iso_code | upcase }}</span>
+
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+        <path
+          d="M2 3.5L5 6.5L8 3.5"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
+    <ul class="ls-dropdown" role="listbox" aria-label="Language">
+      {% for language in localization.available_languages %}
+        <li
+          role="option"
+          class="ls-option{% if language.iso_code == localization.language.iso_code %} ls-option--active{% endif %}"
+          data-value="{{ language.iso_code }}"
+        >
+          {{ language.iso_code | upcase }}
+
+          {% if language.iso_code == localization.language.iso_code %}
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path
+                d="M2 6l3 3 5-5"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endform %}
+</language-switcher>
+
+{% stylesheet %}
+  language-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .ls-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 32px;
+    padding: 0 10px;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: currentColor;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .ls-trigger:hover,
+  .ls-trigger.is-open {
+    border-color: rgba(0, 0, 0, 0.35);
+  }
+
+  .ls-trigger svg {
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+
+  .ls-trigger.is-open svg {
+    transform: rotate(180deg);
+  }
+
+  .ls-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    min-width: 72px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+  }
+
+  .ls-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  .ls-option + .ls-option {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .ls-option:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .ls-option--active {
+    background: rgba(0, 0, 0, 0.03);
+  }
+{% endstylesheet %}
