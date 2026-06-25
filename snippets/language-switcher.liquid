@@ -4,7 +4,7 @@
   fetchpriority="low"
 ></script>
 
-<language-switcher>
+<language-switcher class="ls-desktop">
   {% form 'localization' %}
     <input
       type="hidden"
@@ -135,5 +135,11 @@
 
   .ls-option--active {
     background: rgba(0, 0, 0, 0.03);
+  }
+
+  @media screen and (max-width: 750px) {
+    .ls-desktop {
+      display: none;
+    }
   }
 {% endstylesheet %}
