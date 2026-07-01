@@ -190,7 +190,7 @@ class NavbarSearch extends SearchForm {
     const params = new URLSearchParams({
       q: searchTerm,
       section_id: "navbar-search",
-      "resources[type]": "query,product",
+      "resources[type]": "query,collection,product",
       "resources[limit]": "4",
       "resources[limit_scope]": "each",
       "resources[options][unavailable_products]": "last",

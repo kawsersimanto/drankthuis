@@ -1,27 +1,27 @@
 {% liquid
   assign search_performed = predictive_search.performed
-  assign queries = predictive_search.resources.queries
+  assign collections = predictive_search.resources.collections
   assign products = predictive_search.resources.products
   assign search_term = predictive_search.terms
 %}
 
 {% if search_performed %}
-  {% assign total_results = products.size | plus: queries.size %}
+  {% assign total_results = products.size | plus: collections.size %}
 
   {% if total_results > 0 %}
     <div class="navbar-search__columns">
-      {% if queries.size > 0 %}
+      {% if collections.size > 0 %}
         <div class="navbar-search__column navbar-search__column--suggestions">
           <p class="navbar-search__column-title">Suggestions</p>
           <ul class="navbar-search__suggestions-list" role="presentation">
-            {% for query in queries %}
+            {% for collection in collections %}
               <li
                 class="navbar-search__suggestion-item"
                 role="option"
-                id="navbar-search-result-query-{{ forloop.index }}"
+                id="navbar-search-result-collection-{{ forloop.index }}"
               >
-                <a href="{{ query.url }}" class="navbar-search__suggestion-link">
-                  {{ query.styled_text }}
+                <a href="{{ collection.url }}" class="navbar-search__suggestion-link">
+                  {{ collection.title }}
                 </a>
               </li>
             {% endfor %}
@@ -64,12 +64,16 @@
 
     <a href="{{ routes.search_url }}?q={{ search_term | url_encode }}" class="navbar-search__view-all">
       <span>Search for &ldquo;{{ search_term }}&rdquo;</span>
-      <span aria-hidden="true">&rarr;</span>
+      <span aria-hidden="true">
+        {{ 'icon-chevron-right.svg' | inline_asset_content }}
+      </span>
     </a>
 
     <span data-navbar-search-live-region-count-value class="visually-hidden"> {{ total_results }} results </span>
   {% else %}
-    <p class="navbar-search__empty">No results found for &ldquo;{{ search_term }}&rdquo;</p>
+    <p class="navbar-search__empty">
+      No results found for <span class="tw:font-semibold">&ldquo;{{ search_term }}&rdquo;</span>
+    </p>
     <span data-navbar-search-live-region-count-value class="visually-hidden">No results found</span>
   {% endif %}
 {% endif %}

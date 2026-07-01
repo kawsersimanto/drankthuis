@@ -1,17 +1,33 @@
+navbar-search {
+  --search-input-height: 46px;
+  --search-input-mobile-height: 42px;
+
+  --search-dropdown-padding: 20px;
+  --search-dropdown-column-space: 16px;
+  --search-dropdown-radius: 8px;
+  --search-dropdown-view-all-padding: 10px;
+}
+
 .field {
   position: relative;
 }
 
 .search__input {
   width: 100%;
-  height: 48px;
+  height: var(--search-input-height);
   padding: 20px 78px 6px 16px;
-  border-radius: 12px;
+  border-radius: 8px;
   font-size: 15px;
   line-height: 1.2;
-  background: var(--color-background);
+  background: white !important;
   color: inherit;
   transition: border-color 0.15s ease;
+}
+
+@media (max-width: 750px) {
+  .search__input {
+    height: var(--search-input-mobile-height);
+  }
 }
 
 .search__input::-webkit-search-cancel-button {
@@ -68,31 +84,33 @@
   display: none;
 }
 
+@media screen and (max-width: 750px) {
+  navbar-search {
+    max-width: 100%;
+  }
+}
+
 navbar-search {
   position: relative;
   display: block;
-  min-width: 100%;
-}
-
-@media screen and (min-width: 750px) {
-  navbar-search {
-    min-width: 540px;
-  }
+  max-width: 540px;
+  margin: 0 auto;
 }
 
 /* Dropdown only appears while actively searching */
 .navbar-search__results {
   display: none;
   position: absolute;
-  top: calc(100% + 8px);
+  padding: var(--search-dropdown-padding);
+  top: calc(100% + 5px);
   left: 0;
   right: 0;
   background: white;
-  border-radius: 14px;
+  border-radius: var(--search-dropdown-radius);
   box-shadow: 0 12px 32px rgb(0 0 0 / 0.12);
   overflow: hidden;
   overflow-y: auto;
-  z-index: 20;
+  z-index: 999999;
 }
 
 navbar-search[open] .navbar-search__results {
@@ -101,17 +119,21 @@ navbar-search[open] .navbar-search__results {
 
 .navbar-search__columns {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding: 20px;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--search-dropdown-column-space);
+}
+
+@media (max-width: 750px) {
+  .navbar-search__columns {
+    grid-template-columns: 1fr;
+  }
 }
 
 .navbar-search__column-title {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: rgb(var(--color-foreground-rgb) / 0.55);
+  color: var(--color-foreground);
   margin: 0 0 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--color-border);
@@ -128,26 +150,17 @@ navbar-search[open] .navbar-search__results {
 
 .navbar-search__suggestion-link {
   display: block;
-  padding: 6px;
   border-radius: 6px;
   text-decoration: none;
   color: inherit;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .navbar-search__suggestion-link:hover,
 .navbar-search__suggestion-item[aria-selected="true"]
   .navbar-search__suggestion-link {
-  background: rgb(var(--color-foreground-rgb) / 0.06);
-}
-
-/* Shopify's predictive search wraps the matched term in <b> — style it as a highlight */
-.navbar-search__suggestion-link b {
-  font-weight: 600;
-  font-style: normal;
-  background: rgb(250 204 21 / 0.35);
-  border-radius: 2px;
-  padding: 0 1px;
+  color: var(--color-background);
 }
 
 .navbar-search__products-list {
@@ -156,31 +169,24 @@ navbar-search[open] .navbar-search__results {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 15px;
 }
 
 .navbar-search__link {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 8px 6px;
-  border-radius: 8px;
   text-decoration: none;
   color: inherit;
 }
 
-.navbar-search__item[aria-selected="true"] .navbar-search__link,
-.navbar-search__link:hover {
-  background: rgb(var(--color-foreground-rgb) / 0.06);
-}
-
 .navbar-search__thumb {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   border-radius: 8px;
   object-fit: contain;
   flex-shrink: 0;
-  background: rgb(var(--color-foreground-rgb) / 0.04);
+  background: white;
   border: 1px solid var(--color-border);
 }
 
@@ -191,37 +197,33 @@ navbar-search[open] .navbar-search__results {
 }
 
 .navbar-search__vendor {
-  font-size: 11px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
-  opacity: 0.6;
 }
 
 .navbar-search__title {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
 }
 
 .navbar-search__price {
   font-size: 14px;
-  opacity: 0.85;
+  font-weight: 600;
+  opacity: 0.8;
 }
 
 .navbar-search__view-all {
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  background: rgb(var(--color-foreground-rgb) / 0.03);
-  border-top: 1px solid var(--color-border);
-  text-decoration: none;
-  color: inherit;
-  font-weight: 600;
+  padding: var(--search-dropdown-view-all-padding);
+  background-color: var(--color-border);
+  border-radius: var(--search-dropdown-radius);
   font-size: 14px;
 }
 
 .navbar-search__empty {
-  padding: 24px;
+  padding: var(--search-dropdown-padding);
   text-align: center;
-  opacity: 0.7;
 }
