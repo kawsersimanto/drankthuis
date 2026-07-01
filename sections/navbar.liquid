@@ -1,0 +1,84 @@
+{% liquid
+  capture logo
+    content_for 'block', type: '_header-logo', id: 'header-logo'
+  endcapture
+%}
+
+{{ 'navbar-search.css' | asset_url | stylesheet_tag }}
+<script type="module" src="{{ 'cart-icon.js' | asset_url }}" fetchpriority="low"></script>
+<script type="module" src="{{ 'navbar-search.js' | asset_url }}" fetchpriority="low"></script>
+
+{% if settings.cart_type == 'drawer' and template.name != 'cart' %}
+  <script type="module" src="{{ 'cart-drawer.js' | asset_url }}" fetchpriority="low"></script>
+{% endif %}
+
+<header class="section-header color-{{ section.settings.color_scheme }} tw:py-3">
+  <div class="section section--page-width">
+    <div class="tw:flex tw:items-center tw:justify-between tw:gap-3 tw:flex-wrap tw:min-[750px]:flex-nowrap">
+      {{ logo }}
+
+      <div class="tw:order-3 tw:w-full tw:min-[750px]:order-0 tw:min-[750px]:w-auto tw:min-[750px]:flex-1">
+        <navbar-search data-loading-text="Loading...">
+          <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+            <div class="field">
+              <input
+                class="search__input"
+                id="Search-In-Navbar"
+                type="search"
+                name="q"
+                value="{{ search.terms | escape }}"
+                placeholder=" "
+                role="combobox"
+                aria-expanded="false"
+                aria-owns="navbar-search-results"
+                aria-controls="navbar-search-results"
+                aria-haspopup="listbox"
+                autocomplete="off"
+              >
+              <label for="Search-In-Navbar" class="search__label">Search</label>
+              <input type="hidden" name="options[prefix]" value="last">
+
+              <button type="reset" class="reset__button hidden" aria-label="Reset">
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </button>
+
+              <button type="submit" class="search__submit" aria-label="Search">
+                {{- 'icon-search.svg' | inline_asset_content -}}
+              </button>
+            </div>
+          </form>
+
+          <span class="navbar-search-status visually-hidden" role="status" aria-hidden="true"></span>
+
+          <div
+            id="navbar-search-results"
+            data-navbar-search
+            class="navbar-search__results"
+            tabindex="-1"
+            data-testid="navbar-search-results"
+          ></div>
+        </navbar-search>
+      </div>
+
+      <div class="tw:order-2 tw:flex tw:items-center tw:gap-2 tw:min-[750px]:order-0">
+        {% render 'language-switcher' %}
+        {% render 'header-actions', section: section, display_style: 'icon' %}
+      </div>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Navbar",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "presets": [{ "name": "Navbar" }]
+}
+{% endschema %}

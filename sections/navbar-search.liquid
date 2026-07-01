@@ -1,0 +1,75 @@
+{% liquid
+  assign search_performed = predictive_search.performed
+  assign queries = predictive_search.resources.queries
+  assign products = predictive_search.resources.products
+  assign search_term = predictive_search.terms
+%}
+
+{% if search_performed %}
+  {% assign total_results = products.size | plus: queries.size %}
+
+  {% if total_results > 0 %}
+    <div class="navbar-search__columns">
+      {% if queries.size > 0 %}
+        <div class="navbar-search__column navbar-search__column--suggestions">
+          <p class="navbar-search__column-title">Suggestions</p>
+          <ul class="navbar-search__suggestions-list" role="presentation">
+            {% for query in queries %}
+              <li
+                class="navbar-search__suggestion-item"
+                role="option"
+                id="navbar-search-result-query-{{ forloop.index }}"
+              >
+                <a href="{{ query.url }}" class="navbar-search__suggestion-link">
+                  {{ query.styled_text }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% if products.size > 0 %}
+        <div class="navbar-search__column navbar-search__column--products">
+          <p class="navbar-search__column-title">Products</p>
+          <ul class="navbar-search__products-list" role="listbox">
+            {% for product in products %}
+              <li
+                class="navbar-search__item"
+                role="option"
+                id="navbar-search-result-product-{{ forloop.index }}"
+              >
+                <a href="{{ product.url }}" class="navbar-search__link">
+                  {% if product.featured_media %}
+                    {{
+                      product.featured_media
+                      | image_url: width: 100
+                      | image_tag: width: 100, height: 100, class: 'navbar-search__thumb'
+                    }}
+                  {% endif %}
+                  <span class="navbar-search__info">
+                    {% if product.vendor %}
+                      <span class="navbar-search__vendor">{{ product.vendor }}</span>
+                    {% endif %}
+                    <span class="navbar-search__title">{{ product.title }}</span>
+                    <span class="navbar-search__price">{{ product.price | money }}</span>
+                  </span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    </div>
+
+    <a href="{{ routes.search_url }}?q={{ search_term | url_encode }}" class="navbar-search__view-all">
+      <span>Search for &ldquo;{{ search_term }}&rdquo;</span>
+      <span aria-hidden="true">&rarr;</span>
+    </a>
+
+    <span data-navbar-search-live-region-count-value class="visually-hidden"> {{ total_results }} results </span>
+  {% else %}
+    <p class="navbar-search__empty">No results found for &ldquo;{{ search_term }}&rdquo;</p>
+    <span data-navbar-search-live-region-count-value class="visually-hidden">No results found</span>
+  {% endif %}
+{% endif %}
