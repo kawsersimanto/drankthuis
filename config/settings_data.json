@@ -160,7 +160,7 @@
           "floating_link_vertical_offset": 0,
           "floating_link_lateral_offset": 0,
           "floating_link_border_radius": 4,
-          "navigation_link": true,
+          "navigation_link": false,
           "navigation_link_css_selector": "",
           "custom_css": ""
         }

@@ -13,10 +13,20 @@
   "sections": {
     "header_section": {
       "type": "navbar",
-      "blocks": {},
+      "blocks": {
+        "header-logo": {
+          "type": "_header-logo",
+          "static": true,
+          "settings": {
+            "hide_logo_on_home_page": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        }
+      },
       "settings": {
-        "color_scheme": "scheme-1",
-        "customer_account_menu": ""
+        "color_scheme": "scheme-e51fd7fe-c1d2-4752-be64-4fa7632b38d9"
       }
     },
     "header_menu_iwApxA": {
@@ -37,5 +47,8 @@
       }
     }
   },
-  "order": ["header_section", "header_menu_iwApxA"]
+  "order": [
+    "header_section",
+    "header_menu_iwApxA"
+  ]
 }
